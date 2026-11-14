@@ -1,0 +1,883 @@
+/* ---------- languages ---------- */
+const LANGS=[['en','English'],['es','Español'],['pt','Português'],['hi','हिन्दी'],['te','తెలుగు'],['id','Bahasa Indonesia'],['ar','العربية']];
+const T={
+en:{tag:"One washer. One empty lot. Build the busiest plaza in town.",how:"Drag anywhere to walk. Walk up to things to pick them up or drop them off. Stand on a glowing spot to serve or to buy.",open:"Open the shop",back:"Back to work",upg:"Upgrades",plz:"Plazas",menu:"Menu",snd:"Sound",mus:"Music",on:"On",off:"Off",lang:"Language",restart:"Restart this plaza",restart2:"Tap again to erase this plaza",paused:"Paused",resume:"Resume",wb:"Welcome back",away:"Your plaza earned {0} coins while you were away.",collect:"Collect",
+L:"LAUNDROMAT",C:"CAR WASH",P:"PET SALON",K:"PHONE REPAIR",F:"FUEL STATION",R:"CAR REPAIR",D:"DRIVE-IN",J:"JUICE BAR",S:"SNACK BAR",H:"PET CLINIC",Y:"PET PLAYHOUSE",
+d_cleanTowel:"TOWEL STORE",d_part:"PARTS DEPOT",d_fuel:"FUEL DEPOT",d_fruit:"FRUIT CRATE",d_corn:"CORN STORE",d_med:"MEDICINE STORE",
+serve:"SERVE",work:"WORK",openX:"Open {0}",hireN:"Hire: {0}",washerN:"Washer {0}",cnt:"Counter",runL:"Laundry runner",runT:"Towel runner",runS:"Supply runner",next:"Open next plaza",trophy:"Golden trophy",
+outOf:"Out of stock",noWater:"No water",full:"FULL",catch:"Catch me",
+h_dog:"A pet is loose. Run into it to catch it.",h_dirty:"Drop the dirty load at a free washer.",h_bag:"Stock the laundromat counter.",h_bagServe:"Stock the counter, then stand on the serve spot.",h_supply:"Take the supplies to the shop that needs them.",h_cash:"Collect your coins.",h_buy:"You can afford “{0}”. Stand still on its green pad.",h_upg:"You can afford an upgrade.",h_stock:"A shop is out of stock. Fetch what it needs.",h_ready:"Clean laundry is ready at a washer.",h_hamper:"Pick up the dirty laundry from the hamper.",h_serve:"Stand on the serve spot to hand out laundry.",h_station:"Stand on a glowing work spot to serve the customer.",h_water:"Water is low. Upgrade the tank or the pump.",h_return:"Nothing needs these yet. Put them back at the depot.",h_idle:"Customers are on their way.",
+t_unl:"Unlocked: {0}",t_towels:"Each wash uses a towel. Wash used towels in the laundromat.",t_parts:"This shop needs supplies. Bring them from the depot.",t_caught:"Got it. Back on the table.",t_done:"Plaza complete. A new plaza is open.",t_all:"Every plaza is complete. You run the town.",t_combo:"This customer is visiting a second shop and pays 50% more.",
+u_carry:"Carry more",u_speed:"Walk faster",u_sspeed:"Faster runners",u_scarry:"Runners carry more",u_tank:"Bigger water tank",u_pump:"Faster water pump",u_load:"Bigger washer load",u_wspeed:"Faster washers",u_tspeed:"Faster service",u_tprice:"Higher price",max:"Maxed",you:"You",staff:"Staff",water:"Water",
+p0:"Corner Lot",p1:"Fuel Row",p2:"Drive-In Field",p3:"Pet Street",p4:"Market Street",p5:"Grand Plaza",locked:"Locked",here:"You are here",go:"Go",complete:"Complete"},
+
+es:{tag:"Una lavadora. Un solar vacío. Construye la plaza más concurrida de la ciudad.",how:"Arrastra para caminar. Acércate a las cosas para recogerlas o dejarlas. Quédate sobre un punto brillante para atender o comprar.",open:"Abrir la tienda",back:"A trabajar",upg:"Mejoras",plz:"Plazas",menu:"Menú",snd:"Sonido",mus:"Música",on:"Sí",off:"No",lang:"Idioma",restart:"Reiniciar esta plaza",restart2:"Toca otra vez para borrar esta plaza",paused:"En pausa",resume:"Continuar",wb:"Bienvenido de nuevo",away:"Tu plaza ganó {0} monedas mientras no estabas.",collect:"Cobrar",
+L:"LAVANDERÍA",C:"AUTOLAVADO",P:"PELUQUERÍA CANINA",K:"REPARACIÓN DE MÓVILES",F:"GASOLINERA",R:"TALLER MECÁNICO",D:"AUTOCINE",J:"ZUMERÍA",S:"PUESTO DE SNACKS",H:"CLÍNICA VETERINARIA",Y:"GUARDERÍA CANINA",
+d_cleanTowel:"ALMACÉN DE TOALLAS",d_part:"ALMACÉN DE PIEZAS",d_fuel:"DEPÓSITO DE COMBUSTIBLE",d_fruit:"CAJA DE FRUTA",d_corn:"ALMACÉN DE MAÍZ",d_med:"ALMACÉN DE MEDICINAS",
+serve:"ATENDER",work:"TRABAJAR",openX:"Abrir {0}",hireN:"Contratar: {0}",washerN:"Lavadora {0}",cnt:"Mostrador",runL:"Repartidor de ropa",runT:"Repartidor de toallas",runS:"Repartidor de suministros",next:"Abrir la siguiente plaza",trophy:"Trofeo de oro",
+outOf:"Sin existencias",noWater:"Sin agua",full:"LLENO",catch:"¡Atrápame!",
+h_dog:"Una mascota se escapó. Corre hacia ella para atraparla.",h_dirty:"Deja la ropa sucia en una lavadora libre.",h_bag:"Repón el mostrador de la lavandería.",h_bagServe:"Repón el mostrador y quédate en el punto de atención.",h_supply:"Lleva los suministros a la tienda que los necesita.",h_cash:"Recoge tus monedas.",h_buy:"Puedes pagar «{0}». Quédate quieto sobre su casilla verde.",h_upg:"Puedes pagar una mejora.",h_stock:"Una tienda se quedó sin existencias. Trae lo que necesita.",h_ready:"Hay ropa limpia lista en una lavadora.",h_hamper:"Recoge la ropa sucia del cesto.",h_serve:"Quédate en el punto de atención para entregar la ropa.",h_station:"Quédate en un punto de trabajo brillante para atender al cliente.",h_water:"Queda poca agua. Mejora el depósito o la bomba.",h_return:"Nada necesita esto todavía. Devuélvelo al almacén.",h_idle:"Los clientes están en camino.",
+t_unl:"Desbloqueado: {0}",t_towels:"Cada lavado usa una toalla. Lava las toallas usadas en la lavandería.",t_parts:"Esta tienda necesita suministros. Tráelos del almacén.",t_caught:"¡Atrapado! De vuelta a la mesa.",t_done:"Plaza completa. Hay una plaza nueva abierta.",t_all:"Todas las plazas están completas. La ciudad es tuya.",t_combo:"Este cliente visita una segunda tienda y paga un 50 % más.",
+u_carry:"Cargar más",u_speed:"Caminar más rápido",u_sspeed:"Repartidores más rápidos",u_scarry:"Los repartidores cargan más",u_tank:"Depósito de agua más grande",u_pump:"Bomba de agua más rápida",u_load:"Más carga por lavadora",u_wspeed:"Lavadoras más rápidas",u_tspeed:"Servicio más rápido",u_tprice:"Precio más alto",max:"Máximo",you:"Tú",staff:"Personal",water:"Agua",
+p0:"El Solar",p1:"Calle del Combustible",p2:"Campo del Autocine",p3:"Calle de las Mascotas",p4:"Calle del Mercado",p5:"Gran Plaza",locked:"Bloqueada",here:"Estás aquí",go:"Ir",complete:"Completa"},
+
+pt:{tag:"Uma lavadora. Um terreno vazio. Construa a praça mais movimentada da cidade.",how:"Arraste para andar. Chegue perto das coisas para pegar ou entregar. Fique em um ponto brilhante para atender ou comprar.",open:"Abrir a loja",back:"Ao trabalho",upg:"Melhorias",plz:"Praças",menu:"Menu",snd:"Som",mus:"Música",on:"Ligado",off:"Desligado",lang:"Idioma",restart:"Reiniciar esta praça",restart2:"Toque de novo para apagar esta praça",paused:"Pausado",resume:"Continuar",wb:"Bem-vindo de volta",away:"Sua praça ganhou {0} moedas enquanto você estava fora.",collect:"Coletar",
+L:"LAVANDERIA",C:"LAVA-RÁPIDO",P:"BANHO E TOSA",K:"CONSERTO DE CELULAR",F:"POSTO DE COMBUSTÍVEL",R:"OFICINA MECÂNICA",D:"CINEMA DRIVE-IN",J:"LOJA DE SUCOS",S:"LANCHONETE",H:"CLÍNICA VETERINÁRIA",Y:"CRECHE PARA PETS",
+d_cleanTowel:"DEPÓSITO DE TOALHAS",d_part:"DEPÓSITO DE PEÇAS",d_fuel:"DEPÓSITO DE COMBUSTÍVEL",d_fruit:"CAIXA DE FRUTAS",d_corn:"DEPÓSITO DE MILHO",d_med:"DEPÓSITO DE REMÉDIOS",
+serve:"ATENDER",work:"TRABALHAR",openX:"Abrir {0}",hireN:"Contratar: {0}",washerN:"Lavadora {0}",cnt:"Balcão",runL:"Ajudante de roupas",runT:"Ajudante de toalhas",runS:"Ajudante de suprimentos",next:"Abrir a próxima praça",trophy:"Troféu de ouro",
+outOf:"Sem estoque",noWater:"Sem água",full:"CHEIO",catch:"Me pegue!",
+h_dog:"Um pet fugiu. Corra até ele para pegá-lo.",h_dirty:"Coloque a roupa suja em uma lavadora livre.",h_bag:"Abasteça o balcão da lavanderia.",h_bagServe:"Abasteça o balcão e fique no ponto de atendimento.",h_supply:"Leve os suprimentos para a loja que precisa deles.",h_cash:"Colete suas moedas.",h_buy:"Você pode pagar “{0}”. Fique parado no quadrado verde.",h_upg:"Você pode pagar uma melhoria.",h_stock:"Uma loja está sem estoque. Traga o que ela precisa.",h_ready:"Há roupa limpa pronta em uma lavadora.",h_hamper:"Pegue a roupa suja no cesto.",h_serve:"Fique no ponto de atendimento para entregar a roupa.",h_station:"Fique em um ponto de trabalho brilhante para atender o cliente.",h_water:"A água está acabando. Melhore a caixa-d’água ou a bomba.",h_return:"Nada precisa disso ainda. Devolva ao depósito.",h_idle:"Os clientes estão a caminho.",
+t_unl:"Liberado: {0}",t_towels:"Cada lavagem usa uma toalha. Lave as toalhas usadas na lavanderia.",t_parts:"Esta loja precisa de suprimentos. Traga do depósito.",t_caught:"Peguei! De volta à mesa.",t_done:"Praça completa. Uma nova praça foi aberta.",t_all:"Todas as praças estão completas. A cidade é sua.",t_combo:"Este cliente visita uma segunda loja e paga 50% a mais.",
+u_carry:"Carregar mais",u_speed:"Andar mais rápido",u_sspeed:"Ajudantes mais rápidos",u_scarry:"Ajudantes carregam mais",u_tank:"Caixa-d’água maior",u_pump:"Bomba de água mais rápida",u_load:"Mais carga por lavadora",u_wspeed:"Lavadoras mais rápidas",u_tspeed:"Serviço mais rápido",u_tprice:"Preço mais alto",max:"Máximo",you:"Você",staff:"Equipe",water:"Água",
+p0:"Terreno da Esquina",p1:"Rua do Posto",p2:"Campo do Drive-In",p3:"Rua dos Pets",p4:"Rua do Mercado",p5:"Grande Praça",locked:"Bloqueada",here:"Você está aqui",go:"Ir",complete:"Completa"},
+
+hi:{tag:"एक वॉशिंग मशीन। एक खाली प्लॉट। शहर का सबसे व्यस्त प्लाज़ा बनाइए।",how:"चलने के लिए कहीं भी खींचें। चीज़ें उठाने या रखने के लिए उनके पास जाएँ। सेवा देने या ख़रीदने के लिए चमकते निशान पर खड़े हों।",open:"दुकान खोलें",back:"काम पर लौटें",upg:"अपग्रेड",plz:"प्लाज़ा",menu:"मेनू",snd:"आवाज़",mus:"संगीत",on:"चालू",off:"बंद",lang:"भाषा",restart:"यह प्लाज़ा फिर से शुरू करें",restart2:"इस प्लाज़ा को मिटाने के लिए दोबारा दबाएँ",paused:"रुका हुआ",resume:"जारी रखें",wb:"वापसी पर स्वागत है",away:"आपकी ग़ैरमौजूदगी में प्लाज़ा ने {0} सिक्के कमाए।",collect:"ले लें",
+L:"लॉन्ड्री",C:"कार वॉश",P:"पेट सैलून",K:"फ़ोन रिपेयर",F:"पेट्रोल पंप",R:"कार रिपेयर",D:"ड्राइव-इन सिनेमा",J:"जूस कॉर्नर",S:"स्नैक्स शॉप",H:"पेट क्लिनिक",Y:"पेट प्ले हाउस",
+d_cleanTowel:"तौलिया गोदाम",d_part:"पुर्ज़ों का गोदाम",d_fuel:"ईंधन गोदाम",d_fruit:"फलों की पेटी",d_corn:"मक्के का गोदाम",d_med:"दवाओं का गोदाम",
+serve:"सेवा",work:"काम",openX:"{0} खोलें",hireN:"रखें: {0}",washerN:"वॉशिंग मशीन {0}",cnt:"काउंटर",runL:"कपड़े ढोने वाला",runT:"तौलिये ढोने वाला",runS:"सामान ढोने वाला",next:"अगला प्लाज़ा खोलें",trophy:"सोने की ट्रॉफ़ी",
+outOf:"सामान ख़त्म",noWater:"पानी ख़त्म",full:"भरा हुआ",catch:"पकड़ो मुझे",
+h_dog:"एक पालतू जानवर भाग गया है। उसे पकड़ने के लिए उसकी ओर दौड़ें।",h_dirty:"गंदे कपड़े किसी ख़ाली वॉशिंग मशीन में डालें।",h_bag:"लॉन्ड्री काउंटर पर धुले कपड़े रखें।",h_bagServe:"काउंटर पर कपड़े रखें, फिर सेवा वाले निशान पर खड़े हों।",h_supply:"सामान उस दुकान तक पहुँचाएँ जिसे उसकी ज़रूरत है।",h_cash:"अपने सिक्के उठाएँ।",h_buy:"आप “{0}” ख़रीद सकते हैं। उसके हरे पैड पर रुककर खड़े हों।",h_upg:"आप एक अपग्रेड ख़रीद सकते हैं।",h_stock:"एक दुकान का सामान ख़त्म हो गया है। ज़रूरी सामान लाएँ।",h_ready:"वॉशिंग मशीन पर धुले कपड़े तैयार हैं।",h_hamper:"टोकरी से गंदे कपड़े उठाएँ।",h_serve:"कपड़े देने के लिए सेवा वाले निशान पर खड़े हों।",h_station:"ग्राहक की सेवा के लिए चमकते काम वाले निशान पर खड़े हों।",h_water:"पानी कम है। टंकी या पंप को अपग्रेड करें।",h_return:"अभी इनकी ज़रूरत किसी को नहीं है। इन्हें गोदाम में वापस रख दें।",h_idle:"ग्राहक आ रहे हैं।",
+t_unl:"खुल गया: {0}",t_towels:"हर धुलाई में एक तौलिया लगता है। इस्तेमाल किए तौलिये लॉन्ड्री में धोएँ।",t_parts:"इस दुकान को सामान चाहिए। उसे गोदाम से लाएँ।",t_caught:"पकड़ लिया। वापस टेबल पर।",t_done:"प्लाज़ा पूरा हुआ। एक नया प्लाज़ा खुल गया है।",t_all:"सभी प्लाज़ा पूरे हो गए। पूरा शहर आपका है।",t_combo:"यह ग्राहक दूसरी दुकान पर भी जा रहा है और 50% ज़्यादा देगा।",
+u_carry:"ज़्यादा सामान उठाएँ",u_speed:"तेज़ चलें",u_sspeed:"तेज़ सहायक",u_scarry:"सहायक ज़्यादा उठाएँ",u_tank:"बड़ी पानी की टंकी",u_pump:"तेज़ पानी का पंप",u_load:"मशीन में ज़्यादा कपड़े",u_wspeed:"तेज़ वॉशिंग मशीनें",u_tspeed:"तेज़ सेवा",u_tprice:"ज़्यादा दाम",max:"अधिकतम",you:"आप",staff:"स्टाफ़",water:"पानी",
+p0:"कोने का प्लॉट",p1:"पेट्रोल पंप गली",p2:"ड्राइव-इन मैदान",p3:"पेट स्ट्रीट",p4:"मार्केट स्ट्रीट",p5:"ग्रैंड प्लाज़ा",locked:"बंद",here:"आप यहाँ हैं",go:"जाएँ",complete:"पूरा"},
+
+te:{tag:"ఒక వాషింగ్ మెషిన్. ఒక ఖాళీ స్థలం. ఊరిలో అత్యంత రద్దీగా ఉండే ప్లాజాను నిర్మించండి.",how:"నడవడానికి ఎక్కడైనా లాగండి. వస్తువులను తీసుకోవడానికి లేదా పెట్టడానికి వాటి దగ్గరకు వెళ్లండి. సేవ చేయడానికి లేదా కొనడానికి మెరిసే గుర్తుపై నిలబడండి.",open:"దుకాణం తెరవండి",back:"పనికి తిరిగి వెళ్లండి",upg:"అప్‌గ్రేడ్‌లు",plz:"ప్లాజాలు",menu:"మెనూ",snd:"శబ్దం",mus:"సంగీతం",on:"ఆన్",off:"ఆఫ్",lang:"భాష",restart:"ఈ ప్లాజాను మళ్లీ మొదలుపెట్టండి",restart2:"ఈ ప్లాజాను తొలగించడానికి మళ్లీ నొక్కండి",paused:"ఆపివేయబడింది",resume:"కొనసాగించండి",wb:"తిరిగి స్వాగతం",away:"మీరు లేనప్పుడు మీ ప్లాజా {0} నాణేలు సంపాదించింది.",collect:"తీసుకోండి",
+L:"లాండ్రీ",C:"కార్ వాష్",P:"పెట్ సెలూన్",K:"ఫోన్ రిపేర్",F:"పెట్రోల్ బంక్",R:"కార్ రిపేర్",D:"డ్రైవ్-ఇన్ సినిమా",J:"జ్యూస్ షాప్",S:"స్నాక్స్ షాప్",H:"పెట్ క్లినిక్",Y:"పెట్ ప్లే హౌస్",
+d_cleanTowel:"టవల్ గోదాం",d_part:"విడిభాగాల గోదాం",d_fuel:"ఇంధన గోదాం",d_fruit:"పండ్ల పెట్టె",d_corn:"మొక్కజొన్న గోదాం",d_med:"మందుల గోదాం",
+serve:"సేవ",work:"పని",openX:"{0} తెరవండి",hireN:"నియమించండి: {0}",washerN:"వాషింగ్ మెషిన్ {0}",cnt:"కౌంటర్",runL:"బట్టలు మోసే సహాయకుడు",runT:"టవల్స్ మోసే సహాయకుడు",runS:"సరుకు మోసే సహాయకుడు",next:"తదుపరి ప్లాజాను తెరవండి",trophy:"బంగారు ట్రోఫీ",
+outOf:"సరుకు అయిపోయింది",noWater:"నీళ్లు లేవు",full:"నిండింది",catch:"నన్ను పట్టుకో",
+h_dog:"ఒక పెంపుడు జంతువు పారిపోయింది. దాన్ని పట్టుకోవడానికి దాని వైపు పరుగెత్తండి.",h_dirty:"మురికి బట్టలను ఖాళీగా ఉన్న వాషింగ్ మెషిన్‌లో వేయండి.",h_bag:"లాండ్రీ కౌంటర్‌పై ఉతికిన బట్టలు పెట్టండి.",h_bagServe:"కౌంటర్‌పై బట్టలు పెట్టి, సేవ గుర్తుపై నిలబడండి.",h_supply:"అవసరమైన దుకాణానికి సరుకు చేర్చండి.",h_cash:"మీ నాణేలను తీసుకోండి.",h_buy:"మీరు “{0}” కొనగలరు. దాని ఆకుపచ్చ ప్యాడ్‌పై కదలకుండా నిలబడండి.",h_upg:"మీరు ఒక అప్‌గ్రేడ్ కొనగలరు.",h_stock:"ఒక దుకాణంలో సరుకు అయిపోయింది. కావాల్సినవి తీసుకురండి.",h_ready:"వాషింగ్ మెషిన్ దగ్గర ఉతికిన బట్టలు సిద్ధంగా ఉన్నాయి.",h_hamper:"బుట్టలోంచి మురికి బట్టలు తీసుకోండి.",h_serve:"బట్టలు ఇవ్వడానికి సేవ గుర్తుపై నిలబడండి.",h_station:"కస్టమర్‌కు సేవ చేయడానికి మెరిసే పని గుర్తుపై నిలబడండి.",h_water:"నీళ్లు తక్కువగా ఉన్నాయి. ట్యాంక్ లేదా పంప్‌ను అప్‌గ్రేడ్ చేయండి.",h_return:"వీటిని ఇప్పుడు ఎవరికీ అవసరం లేదు. వాటిని గోదాంలో తిరిగి పెట్టండి.",h_idle:"కస్టమర్లు వస్తున్నారు.",
+t_unl:"తెరుచుకుంది: {0}",t_towels:"ప్రతి వాష్‌కు ఒక టవల్ కావాలి. వాడిన టవల్స్‌ను లాండ్రీలో ఉతకండి.",t_parts:"ఈ దుకాణానికి సరుకు కావాలి. దాన్ని గోదాం నుంచి తీసుకురండి.",t_caught:"దొరికింది. మళ్లీ టేబుల్‌పైకి.",t_done:"ప్లాజా పూర్తయింది. కొత్త ప్లాజా తెరుచుకుంది.",t_all:"అన్ని ప్లాజాలు పూర్తయ్యాయి. ఊరంతా మీదే.",t_combo:"ఈ కస్టమర్ రెండో దుకాణానికి కూడా వెళ్తున్నారు, 50% ఎక్కువ చెల్లిస్తారు.",
+u_carry:"ఎక్కువ మోయండి",u_speed:"వేగంగా నడవండి",u_sspeed:"వేగవంతమైన సహాయకులు",u_scarry:"సహాయకులు ఎక్కువ మోస్తారు",u_tank:"పెద్ద నీటి ట్యాంక్",u_pump:"వేగవంతమైన నీటి పంప్",u_load:"మెషిన్‌లో ఎక్కువ బట్టలు",u_wspeed:"వేగవంతమైన వాషింగ్ మెషిన్లు",u_tspeed:"వేగవంతమైన సేవ",u_tprice:"ఎక్కువ ధర",max:"గరిష్ఠం",you:"మీరు",staff:"సిబ్బంది",water:"నీళ్లు",
+p0:"మూల స్థలం",p1:"పెట్రోల్ బంక్ వీధి",p2:"డ్రైవ్-ఇన్ మైదానం",p3:"పెట్ వీధి",p4:"మార్కెట్ వీధి",p5:"గ్రాండ్ ప్లాజా",locked:"లాక్ చేయబడింది",here:"మీరు ఇక్కడ ఉన్నారు",go:"వెళ్లండి",complete:"పూర్తయింది"},
+
+id:{tag:"Satu mesin cuci. Satu lahan kosong. Bangun plaza paling ramai di kota.",how:"Seret di mana saja untuk berjalan. Dekati barang untuk mengambil atau menaruhnya. Berdiri di titik yang menyala untuk melayani atau membeli.",open:"Buka toko",back:"Kembali bekerja",upg:"Peningkatan",plz:"Plaza",menu:"Menu",snd:"Suara",mus:"Musik",on:"Nyala",off:"Mati",lang:"Bahasa",restart:"Ulangi plaza ini",restart2:"Ketuk lagi untuk menghapus plaza ini",paused:"Dijeda",resume:"Lanjutkan",wb:"Selamat datang kembali",away:"Plaza Anda menghasilkan {0} koin selama Anda pergi.",collect:"Ambil",
+L:"BINATU",C:"CUCI MOBIL",P:"SALON HEWAN",K:"SERVIS PONSEL",F:"SPBU",R:"BENGKEL MOBIL",D:"BIOSKOP DRIVE-IN",J:"KEDAI JUS",S:"KEDAI CAMILAN",H:"KLINIK HEWAN",Y:"PENITIPAN HEWAN",
+d_cleanTowel:"GUDANG HANDUK",d_part:"GUDANG SUKU CADANG",d_fuel:"GUDANG BAHAN BAKAR",d_fruit:"PETI BUAH",d_corn:"GUDANG JAGUNG",d_med:"GUDANG OBAT",
+serve:"LAYANI",work:"KERJA",openX:"Buka {0}",hireN:"Rekrut: {0}",washerN:"Mesin cuci {0}",cnt:"Meja kasir",runL:"Pengantar cucian",runT:"Pengantar handuk",runS:"Pengantar barang",next:"Buka plaza berikutnya",trophy:"Trofi emas",
+outOf:"Stok habis",noWater:"Air habis",full:"PENUH",catch:"Tangkap aku",
+h_dog:"Seekor hewan kabur. Kejar untuk menangkapnya.",h_dirty:"Taruh cucian kotor di mesin cuci yang kosong.",h_bag:"Isi meja kasir binatu.",h_bagServe:"Isi meja kasir, lalu berdiri di titik layanan.",h_supply:"Antar barang ke toko yang membutuhkannya.",h_cash:"Ambil koin Anda.",h_buy:"Anda mampu membeli “{0}”. Berdiri diam di petak hijaunya.",h_upg:"Anda mampu membeli satu peningkatan.",h_stock:"Satu toko kehabisan stok. Ambilkan yang dibutuhkan.",h_ready:"Cucian bersih sudah siap di mesin cuci.",h_hamper:"Ambil cucian kotor dari keranjang.",h_serve:"Berdiri di titik layanan untuk menyerahkan cucian.",h_station:"Berdiri di titik kerja yang menyala untuk melayani pelanggan.",h_water:"Air hampir habis. Tingkatkan tangki atau pompa.",h_return:"Belum ada yang membutuhkannya. Kembalikan ke gudang.",h_idle:"Pelanggan sedang dalam perjalanan.",
+t_unl:"Terbuka: {0}",t_towels:"Setiap cucian memakai satu handuk. Cuci handuk bekas di binatu.",t_parts:"Toko ini butuh barang. Ambil dari gudang.",t_caught:"Tertangkap. Kembali ke meja.",t_done:"Plaza selesai. Plaza baru sudah terbuka.",t_all:"Semua plaza selesai. Kota ini milik Anda.",t_combo:"Pelanggan ini mengunjungi toko kedua dan membayar 50% lebih banyak.",
+u_carry:"Bawa lebih banyak",u_speed:"Jalan lebih cepat",u_sspeed:"Pengantar lebih cepat",u_scarry:"Pengantar bawa lebih banyak",u_tank:"Tangki air lebih besar",u_pump:"Pompa air lebih cepat",u_load:"Muatan mesin cuci lebih besar",u_wspeed:"Mesin cuci lebih cepat",u_tspeed:"Layanan lebih cepat",u_tprice:"Harga lebih tinggi",max:"Maksimal",you:"Anda",staff:"Staf",water:"Air",
+p0:"Lahan Pojok",p1:"Jalan SPBU",p2:"Lapangan Drive-In",p3:"Jalan Hewan",p4:"Jalan Pasar",p5:"Plaza Raya",locked:"Terkunci",here:"Anda di sini",go:"Pergi",complete:"Selesai"},
+
+ar:{tag:"غسالة واحدة. أرض فارغة واحدة. ابنِ أكثر ساحة ازدحامًا في المدينة.",how:"اسحب في أي مكان للمشي. اقترب من الأشياء لالتقاطها أو وضعها. قف على البقعة المضيئة للخدمة أو الشراء.",open:"افتح المتجر",back:"عُد إلى العمل",upg:"الترقيات",plz:"الساحات",menu:"القائمة",snd:"الصوت",mus:"الموسيقى",on:"تشغيل",off:"إيقاف",lang:"اللغة",restart:"إعادة هذه الساحة من البداية",restart2:"اضغط مرة أخرى لمسح هذه الساحة",paused:"متوقف مؤقتًا",resume:"متابعة",wb:"مرحبًا بعودتك",away:"ربحت ساحتك {0} عملة أثناء غيابك.",collect:"استلام",
+L:"المغسلة",C:"غسيل السيارات",P:"صالون الحيوانات",K:"إصلاح الهواتف",F:"محطة وقود",R:"تصليح السيارات",D:"سينما السيارات",J:"محل عصير",S:"محل وجبات خفيفة",H:"عيادة حيوانات",Y:"دار رعاية الحيوانات",
+d_cleanTowel:"مخزن المناشف",d_part:"مخزن القطع",d_fuel:"مخزن الوقود",d_fruit:"صندوق الفاكهة",d_corn:"مخزن الذرة",d_med:"مخزن الأدوية",
+serve:"خدمة",work:"عمل",openX:"افتح {0}",hireN:"وظّف: {0}",washerN:"غسالة {0}",cnt:"الطاولة",runL:"ناقل الغسيل",runT:"ناقل المناشف",runS:"ناقل المؤن",next:"افتح الساحة التالية",trophy:"الكأس الذهبية",
+outOf:"نفد المخزون",noWater:"لا ماء",full:"ممتلئ",catch:"أمسكني",
+h_dog:"هرب حيوان أليف. اركض نحوه لتمسكه.",h_dirty:"ضع الغسيل المتسخ في غسالة فارغة.",h_bag:"املأ طاولة المغسلة بالغسيل النظيف.",h_bagServe:"املأ الطاولة ثم قف على بقعة الخدمة.",h_supply:"أوصل المؤن إلى المتجر الذي يحتاجها.",h_cash:"اجمع عملاتك.",h_buy:"يمكنك شراء «{0}». قف ثابتًا على مربعه الأخضر.",h_upg:"يمكنك شراء ترقية.",h_stock:"نفد المخزون من أحد المتاجر. أحضر ما يحتاجه.",h_ready:"الغسيل النظيف جاهز عند إحدى الغسالات.",h_hamper:"التقط الغسيل المتسخ من السلة.",h_serve:"قف على بقعة الخدمة لتسليم الغسيل.",h_station:"قف على بقعة العمل المضيئة لخدمة الزبون.",h_water:"الماء قليل. رقِّ الخزان أو المضخة.",h_return:"لا شيء يحتاجها الآن. أعدها إلى المخزن.",h_idle:"الزبائن في الطريق.",
+t_unl:"تم الفتح: {0}",t_towels:"كل غسلة تستهلك منشفة. اغسل المناشف المستعملة في المغسلة.",t_parts:"هذا المتجر يحتاج مؤنًا. أحضرها من المخزن.",t_caught:"أمسكته. عاد إلى الطاولة.",t_done:"اكتملت الساحة. فُتحت ساحة جديدة.",t_all:"اكتملت كل الساحات. المدينة كلها لك.",t_combo:"هذا الزبون يزور متجرًا ثانيًا ويدفع 50% أكثر.",
+u_carry:"احمل أكثر",u_speed:"امشِ أسرع",u_sspeed:"ناقلون أسرع",u_scarry:"الناقلون يحملون أكثر",u_tank:"خزان ماء أكبر",u_pump:"مضخة ماء أسرع",u_load:"حمولة أكبر للغسالة",u_wspeed:"غسالات أسرع",u_tspeed:"خدمة أسرع",u_tprice:"سعر أعلى",max:"الحد الأقصى",you:"أنت",staff:"الموظفون",water:"الماء",
+p0:"أرض الزاوية",p1:"شارع الوقود",p2:"ساحة سينما السيارات",p3:"شارع الحيوانات",p4:"شارع السوق",p5:"الساحة الكبرى",locked:"مقفلة",here:"أنت هنا",go:"اذهب",complete:"مكتملة"}
+};
+function tr(k,a){let s=(T[S.lang]&&T[S.lang][k])||T.en[k]||k;if(a!==undefined)s=s.replace('{0}',a);return s}
+
+/* ---------- world data ---------- */
+const K={dirtyBag:{c:'#9a8463'},cleanBag:{c:'#3fa9dc'},dirtyTowel:{c:'#c2ad84'},cleanTowel:{c:'#ffffff'},
+  part:{c:'#f5a623'},fuel:{c:'#e05b3a'},fruit:{c:'#ff8a3d'},corn:{c:'#ffd84d'},med:{c:'#5fd0b0'}};
+const CLEANED={dirtyBag:'cleanBag',dirtyTowel:'cleanTowel'};
+/* k: customer kind, in: supply consumed, bin: dirty item produced, w: water, t: seconds, p: base price */
+const SHOPS={
+ L:{k:'walk',t:5,p:5,c:'#17a2b8',f:['#9fd8e0','#b9e6ea']},
+ C:{k:'car',in:'cleanTowel',bin:'dirtyTowel',w:3,t:7,p:22,c:'#3d7fd9',f:['#9bd0ea','#b4ddf0']},
+ F:{k:'car',in:'fuel',t:4.5,p:17,c:'#e05b3a',f:['#f0cfc4','#f7e0d8']},
+ R:{k:'car',in:'part',t:10,p:62,c:'#6f7d8c',f:['#c8ced6','#dde2e8']},
+ D:{k:'car',t:20,p:44,c:'#5b4b8a',f:['#cfc6e4','#ded8ee']},
+ P:{k:'pet',in:'cleanTowel',bin:'dirtyTowel',w:2,t:5.5,p:30,c:'#e0558a',f:['#f6bfd0','#fad6e1']},
+ H:{k:'pet',in:'med',t:9,p:76,c:'#2fa98b',f:['#bfe6da','#d6f0e8']},
+ Y:{k:'pet',w:1,t:13,p:50,c:'#e08b2f',f:['#f6ddb4','#fbecd2']},
+ K:{k:'walk',in:'part',t:6.5,p:40,c:'#d99a17',f:['#f7dc8a','#fbe9ae']},
+ J:{k:'walk',in:'fruit',w:1,t:4,p:18,c:'#e8731f',f:['#ffd9a8','#ffe8c9']},
+ S:{k:'walk',in:'corn',t:3.5,p:13,c:'#c0392b',f:['#f3c7c2','#f9dedb']}
+};
+const CARX=[1.5,12,22.5,33],CARY=2.0,CSTEP=2.4;
+const GSLOT=[[14.5,8.6],[25.5,8.6],[1.5,16.2],[12,16.2],[22.5,16.2],[33,16.2]],GSTEP=2.2;
+const DEPOTXY=[[-2.9,11.6],[40,4.2],[40,11.6],[5,21.6],[16,21.6],[27,21.6]];
+const LWX=i=>1.2+1.8*i,LCOUNT=[0.4,11.4],LSERVE=[1.8,11.4],LHAMP=[-1.3,9.0],LCASH=[2.4,12.6];
+const TANK=[-3.0,4.2];
+const PLAZAS=[
+  {shops:['L','C','P','K'],pm:1,g:.9,m:13.16,pal:['#b7dba0','#efe6d2','#d9cdb2','#5fa35a','#7cc06f']},
+  {shops:['F','C','R'],pm:5,g:.9,m:16.93,pal:['#c9cf9f','#eae4d2','#d4ccb4','#79934f','#9ab766']},
+  {shops:['D','J','S'],pm:25,g:.9,m:15.32,pal:['#9fb9a8','#e7e3d6','#cfc9b8','#4f7f66','#6fa184']},
+  {shops:['P','H','Y'],pm:120,g:.9,m:26.17,pal:['#a3d68f','#f3ecd9','#dcd2b6','#3f8f55','#62b46c']},
+  {shops:['L','C','F','P','J'],pm:600,g:.9,m:13.21,pal:['#d6cf9c','#f5e2c4','#e2cba3','#8a9a45','#aebd5c']},
+  {shops:['L','C','F','R','D','P','K','J','S','H','Y'],pm:3000,g:.9,m:17.06,pal:['#b9d6a4','#f3e6ee','#e0cfdb','#5a9a6a','#7fbf8a']}
+];
+let PB={x0:-4,y0:-2.6,x1:38,y1:22},TREES=[];
+function calcBounds(){
+  let x0=-3.2,x1=6,y1=6;
+  const ex=(a,b,c)=>{x0=Math.min(x0,a);x1=Math.max(x1,b);y1=Math.max(y1,c)};
+  if(lau)ex(-2.8,11.9,13.6);
+  for(const sp of shops){if(sp.t==='L')continue;const w=sp.kind==='car'?CSTEP:GSTEP;
+    if(sp.kind==='car')ex(sp.bx-2.9,sp.bx+w*3+1.7,5.4);else ex(sp.bx-3.0,sp.bx+w*3+1.7,sp.by+3.6)}
+  for(const d of depots)ex(d.x-1.6,d.x+1.6,d.y+2.1);
+  for(const p of SEQ)ex(p.x-1.4,p.x+1.4,p.y+1.6);
+  ex(TANK[0]-1.4,TANK[0]+1.4,TANK[1]+1.4);
+  PB={x0:Math.floor(x0)-1,y0:-2.6,x1:Math.ceil(x1)+1,y1:Math.ceil(y1)+1};
+  let sd=PZ.pm*7+shops.length*131+17;const rr=()=>{sd=(sd*1103515245+12345)&0x7fffffff;return sd/0x7fffffff};
+  TREES=[];
+  for(let y=PB.y0+1;y<PB.y1;y+=5.5+rr()*2.5){TREES.push([PB.x0-1.6-rr()*2.6,y+rr()*2]);TREES.push([PB.x1+1.6+rr()*2.6,y+rr()*2])}
+  for(let x=PB.x0;x<PB.x1;x+=7+rr()*4)TREES.push([x+rr()*3,PB.y1+1.7+rr()*2.4]);
+  for(let x=PB.x0-6;x<PB.x1+6;x+=9+rr()*5)TREES.push([x+rr()*4,-7.5-rr()*1.6]);
+}
+const SKIN=['#f2c9a0','#d9a273','#b97a4e','#8d5a3b','#f7d7b5'];
+const SHIRT=['#e4572e','#7b6cf6','#17bebb','#ffc914','#76b041','#ef6f9b','#5b8def','#f08a4b'];
+const CARCOL=['#e4572e','#5b8def','#ffc914','#76b041','#ef6f9b','#8e7dbe','#f4f1de'];
+const DOGCOL=['#c68b59','#f1e3c8','#6b4a35','#d9d9d9','#e0a458'];
+const STAFFCOL={lr:'#17bebb',tr:'#ef6f9b',sr:'#ffc914'};
+
+/* ---------- state ---------- */
+const newPS=()=>({coins:0,b:{},u:{},pp:{},rate:0,time:0,done:false});
+let S={cur:0,maxP:0,lang:'en',snd:true,mus:true,pl:PLAZAS.map(newPS),last:0,seen:{},started:false};
+let PS=S.pl[0],PZ=PLAZAS[0],SEQ=[];
+let shops=[],lau=null,depots=[],piles={},PD={},washers=[],staff=[],fx=[],parts=[],traffic=[],outs=[],OBS=[],UPG=[];
+const tank={w:20,dryT:0};
+const player={x:4,y:12.6,stack:[],wt:0,still:0,moving:false},cam={x:4,y:12.6};
+let POP={},shock=[],payFx=0,xferT=0,cashT=0,hintT=0,saveT=0,toastT=0,earnAcc=0,earnT=0,curAdvice={k:'h_idle'},sheet=null,hiddenPause=false,gameT=0;
+let stockWarn=null;
+
+const lvl=id=>PS.u[id]||0,has=id=>!!PS.b[id];
+const carryCap=()=>4+2*lvl('carry'),pSpeed=()=>4.3+.5*lvl('speed');
+const sCap=()=>3+lvl('scarry'),sSpeed=()=>2.7+.5*lvl('sspeed');
+const loadCap=()=>2+lvl('Lload'),washTime=()=>5*Math.pow(.8,lvl('Lwspeed'));
+const tankCap=()=>20+15*lvl('tank'),pumpRate=()=>.8+.7*lvl('pump');
+const svcTime=sp=>SHOPS[sp.t].t*Math.pow(.8,lvl(sp.t+'speed'));
+const price=sp=>Math.round(PZ.pm*SHOPS[sp.t].p*Math.pow(1.38,lvl(sp.t+'price')));
+const nice=c=>{if(c<100)return Math.max(5,Math.round(c/5)*5);const m=Math.pow(10,Math.floor(Math.log10(c))-1);return Math.round(c/m)*m};
+const shape=c=>30*Math.pow(c/30,PZ.g)*Math.pow(PZ.m,Math.min(1,Math.log(Math.max(1,c/30))/2.08));
+const upCost=u=>nice(PZ.pm*shape(u.base*Math.pow(u.r,lvl(u.id))));
+const stX=(sp,k)=>sp.bx+(sp.kind==='car'?CSTEP:GSTEP)*k;
+const stY=sp=>sp.by;
+const custAt=(sp,k)=>[stX(sp,k),sp.kind==='car'?sp.by:sp.by-1.1];
+const padAt=(sp,k)=>[stX(sp,k),sp.by+(sp.kind==='car'?2.0:1.3)];
+const addAt=(sp,k)=>[stX(sp,k),sp.by+(sp.kind==='car'?3.3:2.8)];
+const rackAt=sp=>[sp.bx-(sp.kind==='car'?1.6:1.7),sp.by];
+const cashAt=sp=>sp.t==='L'?LCASH:[sp.bx-(sp.kind==='car'?1.6:1.7),sp.by+(sp.kind==='car'?3.4:1.7)];
+
+/* ---------- build a plaza ---------- */
+function enterPlaza(i){
+  S.cur=i;PS=S.pl[i];PZ=PLAZAS[i];
+  shops=[];lau=null;depots=[];piles={};PD={};washers=[];staff=[];fx=[];parts=[];outs=[];traffic=[];
+  const def=PZ.shops,hasL=def.indexOf('L')>=0;
+  const gorder=hasL?[0,1,2,3,4,5]:[2,3,4,0,1,5];
+  let ci=0,gi=0;
+  def.forEach((t,o)=>{
+    const S0=SHOPS[t],sp={t,o,kind:t==='L'?'laundry':S0.k,q:[],st:[],sp:rnd(1,3),n:0,first:o===0,cash:0};
+    if(t==='L'){sp.bx=0;sp.by=7.6}
+    else if(S0.k==='car'){sp.bx=CARX[ci++];sp.by=CARY}
+    else{const g=GSLOT[gorder[gi++]];sp.bx=g[0];sp.by=g[1]}
+    for(let k=0;k<4;k++)sp.st.push({c:null,busy:false,prog:0,run:false});
+    if(t==='L')lau=sp;
+    shops.push(sp)});
+  /* washers */
+  for(let k=0;k<6;k++)washers.push({q:[],inq:[],t:0,run:false,idle:0});
+  /* depots for supplies that the laundromat cannot make */
+  const sup=[];
+  for(const sp of shops){const s=SHOPS[sp.t].in;if(!s)continue;
+    if(s==='cleanTowel'&&lau)continue;if(sup.indexOf(s)<0)sup.push(s)}
+  sup.forEach((s,n)=>{const p=DEPOTXY[n];depots.push({s,x:p[0],y:p[1],t:0})});
+  SEQ=buildSeq();UPG=buildUpg();recalc();calcBounds();
+  tank.w=tankCap();tank.dryT=0;
+  for(const sp of shops){const s=SHOPS[sp.t].in;if(sp.n&&s)piles['rack'+sp.o]=Array(6).fill(s)}
+  for(const d of depots)piles['dep'+d.s]=depotLive(d.s)?Array(5).fill(d.s):[];
+  const start=lau?[4,12.6]:[shops[0].bx+1,shops[0].by+(shops[0].kind==='car'?3.6:3.2)];
+  player.x=cam.x=start[0];player.y=cam.y=start[1];player.stack=[];earnAcc=0;earnT=0;
+  if(!SIM){setMoney(false);if(!Object.keys(PS.b).length&&PS.coins===0)seedScene();document.body.style.background=PZ.pal[0]}
+}
+function seedScene(){
+  if(lau){for(let i=0;i<2;i++){const c=mkCust(lau),s=lqSlot(i);c.x=s[0];c.y=s[1];c.arr=true;c.dropped=true;c.need=2;lau.q.push(c);piles.hamper.push('dirtyBag','dirtyBag')}}
+  else{const sp=shops[0];for(let i=0;i<2;i++)sp.q.push(mkCust(sp))}}
+const lqSlot=i=>[-0.9-0.95*i,11.4];
+const gqSlot=(sp,i)=>[sp.bx-2.0-0.95*i,sp.by-1.3];
+const cqSlot=(sp,i)=>[sp.bx-1.2-3*i,-3.4];
+
+function shopN(sp){if(sp.t==='L')return 1+[1,2,3,4,5].filter(k=>has('w'+k)).length;
+  if(!(sp.first||has('o'+sp.t)))return 0;return 1+[1,2,3].filter(k=>has('s'+sp.t+k)).length}
+const depotLive=s=>shops.some(sp=>sp.n&&SHOPS[sp.t].in===s);
+const SRN=()=>Math.min(6,2+depots.length),TRN=()=>Math.min(5,2+shops.filter(x=>x.n&&SHOPS[x.t].bin).length);
+function recalc(){
+  for(const sp of shops)sp.n=shopN(sp);
+  /* pickup / dropoff points */
+  PD={};
+  if(lau){PD.hamper={x:LHAMP[0],y:LHAMP[1],z:.3,src:1,r:1.2};
+    PD.counter={x:LCOUNT[0],y:LCOUNT[1],z:.6,acc:['cleanBag'],cap:12+4*(lau.n-1),r:1.55};
+    for(let i=0;i<lau.n;i++)PD['wout'+i]={x:LWX(i),y:9.1,z:.04,src:1,r:1}}
+  for(const sp of shops){const S0=SHOPS[sp.t];if(sp.t==='L'||!sp.n)continue;
+    if(S0.in){const r=rackAt(sp);PD['rack'+sp.o]={x:r[0],y:r[1],z:.5,acc:[S0.in],cap:8+3*(sp.n-1),r:1.3}}
+    if(S0.bin&&lau){const r=rackAt(sp);PD['bin'+sp.o]={x:r[0],y:r[1]+(sp.kind==='car'?1.5:1.6),z:.08,src:1,r:1.15}}}
+  for(const d of depots)PD['dep'+d.s]={x:d.x,y:d.y,z:.45,src:1,r:1.35,dep:d.s,acc:[d.s],cap:20};
+  for(const k in PD)if(!piles[k])piles[k]=[];
+  /* obstacles */
+  OBS=[[TANK[0],TANK[1],.8]];
+  if(lau){for(let i=0;i<lau.n;i++)OBS.push([LWX(i),7.6,.78]);OBS.push([LCOUNT[0],LCOUNT[1],.84],[LHAMP[0],LHAMP[1],.56])}
+  for(const sp of shops){if(sp.t==='L'||!sp.n)continue;const S0=SHOPS[sp.t];
+    if(S0.in)OBS.push(rackAt(sp).concat(.56));
+    if(sp.kind!=='car')for(let k=0;k<sp.n;k++)OBS.push([stX(sp,k),sp.by,.7]);
+    if(sp.t==='F')for(let k=0;k<sp.n;k++)OBS.push([stX(sp,k)-1.0,sp.by,.4]);
+    if(sp.t==='D')OBS.push([sp.bx-2.9,sp.by,.6])}
+  for(const d of depots)OBS.push([d.x,d.y,.72]);
+  /* staff */
+  const want=[];
+  for(let n=1;n<=3;n++)if(has('lr'+n))want.push(['lr'+n,'lr',4.0+1.6*(n-1),13.0]);
+  for(let n=1;n<=TRN();n++)if(has('tr'+n))want.push(['tr'+n,'tr',8.8+1.35*(n-1),13.0]);
+  for(let n=1;n<=SRN();n++)if(has('sr'+n))want.push(['sr'+n,'sr',lau?15.6+1.35*(n-1):2.0+1.8*(n-1),lau?13.0:20.2]);
+  if(SIM)want.push(['ghost','all',player.x,player.y]);
+  for(const w of want)if(!staff.some(s=>s.id===w[0]))
+    staff.push({id:w[0],type:w[1],x:w[2],y:w[3],hx:w[2],hy:w[3],col:STAFFCOL[w[1]]||'#ff6f59',stack:[],st:'idle',wait:rnd(0,.4),skin:pick(SKIN),wt:0,dropT:0,stuck:0,job:null});
+}
+function buildSeq(){
+  const it=[],A=(id,t,x,y,lab,arg)=>it.push({id,t,x,y,lab,arg});
+  let anyTowelShop=false,anyDepot=depots.length>0;
+  for(const sp of shops){const S0=SHOPS[sp.t],o=sp.o;
+    if(sp.t==='L'){for(let k=1;k<=5;k++)A('w'+k,1+4*k,LWX(k),9.9,'washerN',k+1);
+      A('cash',2.5,LSERVE[0],LSERVE[1],'hireN',tr('cnt'));continue}
+    if(S0.in==='cleanTowel'&&lau)anyTowelShop=true;
+    const b=3+7*o;
+    if(!sp.first){const p=addAt(sp,0);A('o'+sp.t,b,sp.bx,p[1],'openX',tr(sp.t))}
+    for(let k=0;k<4;k++){
+      if(k>0){const p=addAt(sp,k);A('s'+sp.t+k,b+5*k,p[0],p[1],'stN',[sp.t,k+1])}
+      const q=padAt(sp,k);A('h'+sp.t+k,b+5*k+1.5,q[0],q[1],'hireN',tr(sp.t)+' '+(k+1))}}
+  if(lau)for(let n=1;n<=3;n++)A('lr'+n,5+8*(n-1),4.0+1.6*(n-1),13.0,'hireN',tr('runL'));
+  if(anyTowelShop)for(let n=1;n<=TRN();n++)A('tr'+n,7+6*(n-1),8.8+1.35*(n-1),13.0,'hireN',tr('runT'));
+  if(anyDepot)for(let n=1;n<=SRN();n++)A('sr'+n,8+5.5*(n-1),lau?15.6+1.35*(n-1):2.0+1.8*(n-1),lau?13.0:20.2,'hireN',tr('runS'));
+  it.sort((a,b)=>a.t-b.t);
+  const last=S.cur===PLAZAS.length-1;
+  it.push({id:'next',x:lau?6.5:16,y:20.4,lab:last?'trophy':'next'});
+  const n1=it.length-1;it.forEach((p,i)=>{p.cost=nice(PZ.pm*shape(30*Math.pow(600,i/n1)))});
+  return it}
+function buildUpg(){
+  const u=[{id:'carry',sec:'you',n:5,base:40,r:2.8},{id:'speed',sec:'you',n:4,base:60,r:3}];
+  if(depots.length||lau)u.push({id:'sspeed',sec:'staff',n:4,base:150,r:3},{id:'scarry',sec:'staff',n:4,base:200,r:3});
+  if(shops.some(s=>SHOPS[s.t].w||s.t==='L'))u.push({id:'tank',sec:'water',n:4,base:120,r:2.8},{id:'pump',sec:'water',n:6,base:90,r:2.5});
+  for(const sp of shops){const p=SHOPS[sp.t].p;
+    if(sp.t==='L')u.push({id:'Lload',sec:'L',n:4,base:80,r:3.2},{id:'Lwspeed',sec:'L',n:4,base:90,r:3},{id:'Lprice',sec:'L',n:6,base:70,r:2.9});
+    else u.push({id:sp.t+'speed',sec:sp.t,n:4,base:6*p,r:3},{id:sp.t+'price',sec:sp.t,n:6,base:4.5*p,r:2.9})}
+  return u}
+const secOn=s=>{if(s==='you')return true;if(s==='staff')return staff.length>0;
+  if(s==='water')return true;const sp=shops.find(x=>x.t===s);return sp&&sp.n>0};
+
+/* ---------- save ---------- */
+const KEY='shine-tune-v1',OLDKEY='suds-screws-v3';
+const saveData=()=>({cur:S.cur,maxP:S.maxP,lang:S.lang,snd:S.snd,mus:S.mus,pl:S.pl,last:Date.now(),seen:S.seen});
+function save(){if(SIM)return;try{localStorage.setItem(KEY,JSON.stringify(saveData()))}catch(e){}}
+function loadLocal(){try{const v=localStorage.getItem(KEY);if(v)return JSON.parse(v);
+  const old=localStorage.getItem(OLDKEY);return old?JSON.parse(old):null}catch(e){return null}}
+
+/* ---------- sound ---------- */
+let ac=null,musT=0,musI=0,noiseBuf=null;
+function audioOn(){if(ac){if(ac.state==='suspended')ac.resume().catch(()=>{});return}
+  try{ac=new (window.AudioContext||window.webkitAudioContext)();const n=ac.sampleRate*.4,b=ac.createBuffer(1,n,ac.sampleRate),d=b.getChannelData(0);for(let i=0;i<n;i++)d[i]=Math.random()*2-1;noiseBuf=b;musT=ac.currentTime+.1}catch(e){ac=null}}
+function note(f,t,d,v,type,f2){try{const o=ac.createOscillator(),g=ac.createGain();o.type=type||'triangle';o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);
+  g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(v,t+.012);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(ac.destination);o.start(t);o.stop(t+d+.02)}catch(e){}}
+function sfx(k){if(SIM||!S.snd||!ac)return;const t=ac.currentTime;
+  if(k==='pick')note(520,t,.07,.035,'sine',820);
+  else if(k==='drop')note(420,t,.08,.035,'sine',260);
+  else if(k==='coin'){note(1320,t,.06,.025,'triangle');note(1760,t+.05,.09,.025,'triangle')}
+  else if(k==='ding')note(990,t,.25,.03,'sine');
+  else if(k==='buy'){[523,659,784,1047].forEach((f,i)=>note(f,t+i*.08,.18,.045,'triangle'))}
+  else if(k==='bark'){note(330,t,.09,.05,'sawtooth',220);note(300,t+.12,.09,.05,'sawtooth',200)}
+  else if(k==='whoosh'){try{const s=ac.createBufferSource(),g=ac.createGain(),f=ac.createBiquadFilter();s.buffer=noiseBuf;f.type='bandpass';f.frequency.setValueAtTime(500,t);f.frequency.exponentialRampToValueAtTime(2400,t+.35);
+    g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(.05,t+.08);g.gain.exponentialRampToValueAtTime(.0001,t+.38);s.connect(f);f.connect(g);g.connect(ac.destination);s.start(t);s.stop(t+.4)}catch(e){}}}
+const CH=[[261.63,329.63,392],[220,261.63,329.63],[174.61,220,261.63],[196,246.94,293.66]],PAT=[0,1,2,1,0,2,1,2];
+function musicTick(){if(!ac||!S.mus||SIM)return;if(musT<ac.currentTime)musT=ac.currentTime+.05;
+  while(musT<ac.currentTime+.3){const ch=CH[(musI>>3)&3],st=musI&7;note(ch[PAT[st]]*2,musT,.26,.014,'triangle');if(st===0||st===4)note(ch[0]/2,musT,.55,.028,'sine');if(st===6)note(ch[2]*4,musT,.2,.006,'sine');musT+=.3;musI++}}
+function vib(ms){if(SIM)return;try{if(navigator.vibrate)navigator.vibrate(ms)}catch(e){}}
+
+/* ---------- helpers ---------- */
+function toast(msg){if(SIM)return;const t=$('toast');t.textContent=msg;t.hidden=false;toastT=3.6}
+function setMoney(pop){if(SIM)return;$('money').textContent=fmt(PS.coins);if(pop!==false){const c=$('cash');c.classList.remove('pop');void c.offsetWidth;c.classList.add('pop')}}
+function fly(kind,ax,ay,az,bx,by,bz,hi){if(!SIM&&fx.length<110)fx.push({k:kind,a:[ax,ay,az],b:[bx,by,bz],t:0,hi:hi||.7})}
+function popOn(k){if(!SIM)POP[k]=gameT}
+function popS(k){const t=POP[k];if(t===undefined)return 0;const e=(gameT-t)/.5;if(e>=1||e<0){delete POP[k];return 0}
+  return .28+.72*(1-Math.pow(1-e,3))+.24*Math.sin(e*3.1416)}
+function shockAt(x,y){if(!SIM)shock.push({x:x,y:y,t:0})}
+function burst(x,y,n,cols){if(SIM||REDUCED)return;for(let i=0;i<n;i++)parts.push({x,y,z:.4,vx:rnd(-2,2),vy:rnd(-2,2),vz:rnd(3,6),life:rnd(.6,1.1),c:pick(cols),g:9})}
+function pay(sp,amount){amount=Math.round(amount);sp.cash+=amount;earnAcc+=amount;sfx('coin')}
+function collide(e){for(const o of OBS){const d=D(e.x,e.y,o[0],o[1]),m=o[2]+.3;if(d<m&&d>.0001){e.x=o[0]+(e.x-o[0])/d*m;e.y=o[1]+(e.y-o[1])/d*m}}
+  e.x=Math.max(PB.x0+.6,Math.min(PB.x1-.6,e.x));e.y=Math.max(-1.9,Math.min(PB.y1-.5,e.y))}
+function stepTo(e,tx,ty,sp,dt){const d=D(e.x,e.y,tx,ty);if(d<=sp*dt||d<.001){e.x=tx;e.y=ty;return true}e.x+=(tx-e.x)/d*sp*dt;e.y+=(ty-e.y)/d*sp*dt;return false}
+function sf(hired,px,py){if(hired)return 1;if(SIM)return simF;return D(player.x,player.y,px,py)<.85?1.15:0}
+const wRoom=i=>i<(lau?lau.n:0)?Math.max(0,5-washers[i].inq.length):0;
+function totalWRoom(){let r=0;for(let i=0;i<(lau?lau.n:0);i++)r+=wRoom(i);return r}
+function bestWasher(nx){let b=null,br=0,bd=1e9;for(let i=0;i<(lau?lau.n:0);i++){const r=wRoom(i),d=nx===undefined?Math.random():Math.abs(LWX(i)-nx);
+  if(r>br||(r===br&&r>0&&d<bd)){br=r;bd=d;b={w:i}}}return b}
+const sinkPos=r=>r.w!==undefined?[LWX(r.w)-.8,8.0]:[PD[r.p].x,PD[r.p].y];
+const sinkRoom=r=>r.w!==undefined?wRoom(r.w):(PD[r.p]?PD[r.p].cap-piles[r.p].length:0);
+function sinkAdd(r,kind){if(r.w!==undefined){washers[r.w].inq.push(kind);washers[r.w].idle=0}else piles[r.p].push(kind)}
+function count(key,kinds){let n=0;const p=piles[key]||[];for(const it of p)if(kinds.indexOf(it)>=0)n++;return n}
+const needL=()=>1+((Math.random()*Math.min(2+(lau?lau.n:1)/2,5))|0);
+function mkCust(sp){
+  if(sp.kind==='car')return{car:true,sp,x:PB.x0-11,y:-3.4,ax:'x',col:pick(CARCOL),clean:sp.t!=='C',seed:Math.random()*100,path:null,arr:false,wt:0};
+  const bot=sp.t!=='L'&&sp.by>13,sx=sp.t==='L'?PB.x0-5:(bot?sp.bx+rnd(-1,1):(sp.bx<(PB.x0+PB.x1)/2?PB.x0-5:PB.x1+5)),sy=sp.t==='L'?11.4:(bot?PB.y1+2.5:sp.by-1.1);
+  const c={sp,x:sx,y:sy,ex:sx,ey:sy,need:sp.t==='L'?needL():1,got:0,dropped:false,arr:false,body:pick(SHIRT),skin:pick(SKIN),wt:rnd(0,6),combo:false};
+  if(sp.kind==='pet')c.pet={x:sx,y:sy+.5,st:'follow',col:pick(DOGCOL),tx:0,ty:0,sp:null,k:0};
+  return c}
+function depart(c){
+  const from=c.sp;
+  if(!c.combo&&!c.car&&Math.random()<.22){
+    const o=shops.filter(s=>s!==from&&s.n&&s.kind!=='car'&&(s.kind!=='pet'||c.pet)&&s.q.length<4&&(s.kind!=='pet'||from.kind==='pet'));
+    if(o.length){const n=pick(o);c.sp=n;c.combo=true;c.arr=false;c.got=0;c.dropped=false;c.need=n.t==='L'?needL():1;n.q.push(c);
+      if(!S.seen.combo&&!SIM){S.seen.combo=1;toast(tr('t_combo'))}return}}
+  outs.push(c)}
+function padLabel(p){return p.lab==='stN'?tr(p.arg[0])+' '+p.arg[1]:tr(p.lab,p.arg)}
+function visPads(){const r=[];for(const p of SEQ){if(!has(p.id)){r.push(p);if(r.length>=2)break}}return r}
+function buyPad(p){
+  PS.b[p.id]=1;delete PS.pp[p.id];recalc();
+  for(const sp of shops){const S0=SHOPS[sp.t];if(sp.n&&S0.in&&!piles['rack'+sp.o].length&&(p.id==='o'+sp.t||p.id==='s'+sp.t+(sp.n-1)))
+    piles['rack'+sp.o]=Array(6).fill(S0.in)}
+  if(p.id==='next'){PS.done=true;if(S.cur<PLAZAS.length-1)S.maxP=Math.max(S.maxP,S.cur+1)}
+  if(SIM)return;
+  burst(p.x,p.y,34,['#ffc93c','#4fd39a','#ff6f59','#ffffff','#5b8def']);sfx('buy');vib(30);shockAt(p.x,p.y);
+  {const id=p.id,sp2=shops.find(x=>x.t===id[1]);
+   if(/^w[1-5]$/.test(id))popOn('w'+id.slice(1));
+   else if(id[0]==='o'&&sp2){popOn('st'+sp2.t+'0');popOn('rk'+sp2.o);shockAt(sp2.bx,sp2.by)}
+   else if(id[0]==='s'&&id.length===3&&sp2){popOn('st'+id.slice(1));shockAt(stX(sp2,+id[2]),sp2.by)}
+   else if(id[0]==='h'&&id.length===3)popOn('hp'+id.slice(1));
+   else if(id==='cash')popOn('hpL0');}
+  if(p.id==='next'){toast(tr(S.cur<PLAZAS.length-1?'t_done':'t_all'));if(S.cur<PLAZAS.length-1)setTimeout(()=>{if(!sheet)openSheet('maps')},2200)}
+  else{const sp=shops.find(s=>'o'+s.t===p.id);
+    if(sp&&SHOPS[sp.t].in==='cleanTowel'&&lau&&!S.seen.towel){S.seen.towel=1;toast(tr('t_towels'))}
+    else if(sp&&SHOPS[sp.t].in&&!(SHOPS[sp.t].in==='cleanTowel'&&lau)&&!S.seen.part){S.seen.part=1;toast(tr('t_parts'))}
+    else toast(tr('t_unl',padLabel(p)))}
+  save()}
+
+/* ---------- update ---------- */
+const keys={};let joy=null;
+function inputDir(){let sx=0,sy=0;
+  if(keys.ArrowLeft||keys.a)sx-=1;if(keys.ArrowRight||keys.d)sx+=1;if(keys.ArrowUp||keys.w)sy-=1;if(keys.ArrowDown||keys.s)sy+=1;
+  if(joy){const dx=joy.x-joy.ox,dy=joy.y-joy.oy;if(Math.hypot(dx,dy)>8){sx=dx;sy=dy}}
+  if(!sx&&!sy)return null;const m=Math.hypot(sx,sy);sx/=m;sy/=m;
+  let wx=sx+sy*1.15,wy=sy*1.15-sx;const wm=Math.hypot(wx,wy);return[wx/wm,wy/wm]}
+function allCust(){const a=outs.slice();for(const sp of shops){for(const c of sp.q)a.push(c);for(const st of sp.st)if(st.c)a.push(st.c)}return a}
+function drive(c,pts,sp,dt){while(c.seg<pts.length){const p=pts[c.seg],d=D(c.x,c.y,p[0],p[1]);
+  if(d>.01)c.ax=Math.abs(p[0]-c.x)>Math.abs(p[1]-c.y)?'x':'y';
+  if(d<=sp*dt){c.x=p[0];c.y=p[1];c.seg++;if(c.seg>=pts.length)return true;continue}
+  c.x+=(p[0]-c.x)/d*sp*dt;c.y+=(p[1]-c.y)/d*sp*dt;return false}return true}
+
+function update(dt){
+  PS.time+=dt;gameT+=dt;stockWarn=null;
+  if(SIM){let n=0;for(const sp of shops){if(sp.t==='L'){if(!has('cash')&&sp.q.length&&sp.q[0].arr)n++;continue}
+      for(let k=0;k<sp.n;k++)if(!has('h'+sp.t+k)&&sp.st[k].c&&sp.st[k].c.arr)n++}
+    simF=.65/Math.max(1,n);simBot()}
+  else playerUpdate(dt);
+  tank.w=Math.min(tankCap(),tank.w+pumpRate()*dt);if(tank.dryT>0)tank.dryT-=dt;
+  /* washers */
+  if(lau)for(let i=0;i<lau.n;i++){const w=washers[i],out='wout'+i;
+    if(w.run){w.t+=dt;if(w.t>=washTime()){for(const it of w.q)piles[out].push(CLEANED[it]);w.q=[];w.run=false;w.t=0;sfx('ding')}}
+    else{while(w.q.length<loadCap()&&w.inq.length){w.q.push(w.inq.shift());fly(w.q[w.q.length-1],LWX(i)-.8,8.0,.5,LWX(i),8.0,.6)}
+      if(w.q.length){w.idle+=dt;if((w.q.length>=loadCap()||w.idle>.6)&&piles[out].length<24){
+        if(tank.w>=w.q.length){tank.w-=w.q.length;w.run=true;w.t=0}else tank.dryT=1.5}}}}
+  /* depots refill */
+  for(const d of depots){if(!depotLive(d.s))continue;d.t-=dt;if(d.t<=0){d.t=.4;const k='dep'+d.s;if(piles[k].length<14)piles[k].push(d.s)}}
+  for(const sp of shops)sp.t==='L'?updLaundry(sp,dt):updShop(sp,dt);
+  /* pets */
+  for(const c of allCust()){const p=c.pet;if(!p)continue;
+    if(p.st==='follow'){const tx=c.x-.15,ty=c.y+.6;p.x+=(tx-p.x)*Math.min(1,dt*7);p.y+=(ty-p.y)*Math.min(1,dt*7)}
+    else if(p.st==='table'&&p.sp){p.x=stX(p.sp,p.k);p.y=p.sp.by}
+    else if(p.st==='run'){p.tt-=dt;if(p.tt<=0||D(p.x,p.y,p.tx,p.ty)<.2){p.tt=1.6;const a=rnd(0,6.28),r=rnd(3,5.5);
+        p.tx=Math.max(-2,Math.min(34,c.x+Math.cos(a)*r));p.ty=Math.max(4,Math.min(20,c.y+Math.sin(a)*r))}
+      stepTo(p,p.tx,p.ty,3.1,dt);if(D(player.x,player.y,p.x,p.y)<.95){p.st='table';sfx('ding');vib(20);toast(tr('t_caught'))}}}
+  for(let i=outs.length-1;i>=0;i--){const c=outs[i];c.wt+=dt;
+    if(c.car){if(drive(c,c.path,7,dt))outs.splice(i,1)}
+    else if(stepTo(c,c.ex,c.ey,2.8,dt))outs.splice(i,1)}
+  if(!SIM){spawnTr-=dt;if(spawnTr<=0){spawnTr=rnd(2.5,6);traffic.push({x:PB.x1+13,col:pick(CARCOL)})}
+    for(let i=traffic.length-1;i>=0;i--){traffic[i].x-=6*dt;if(traffic[i].x<PB.x0-15)traffic.splice(i,1)}}
+  for(const h of staff)updStaff(h,dt);
+  earnT+=dt;if(earnT>=30){const r=earnAcc/earnT;PS.rate=PS.rate?PS.rate*.6+r*.4:r;earnAcc=0;earnT=0}
+  if(SIM)return;
+  for(let i=fx.length-1;i>=0;i--){fx[i].t+=dt/.22;if(fx[i].t>=1)fx.splice(i,1)}
+  for(let i=shock.length-1;i>=0;i--){shock[i].t+=dt;if(shock[i].t>=.65)shock.splice(i,1)}
+  for(let i=parts.length-1;i>=0;i--){const p=parts[i];p.life-=dt;p.x+=p.vx*dt;p.y+=p.vy*dt;p.z+=p.vz*dt;p.vz-=p.g*dt;if(p.life<=0||p.z<0)parts.splice(i,1)}
+  if(toastT>0){toastT-=dt;if(toastT<=0)$('toast').hidden=true}
+  hintT-=dt;if(hintT<=0){hintT=.3;curAdvice=advice();const h=tr(curAdvice.k,curAdvice.a);if($('hint').textContent!==h)$('hint').textContent=h;updHud()}
+  saveT-=dt;if(saveT<=0){saveT=8;save()}
+}
+let spawnTr=2;
+function updLaundry(sp,dt){
+  sp.sp-=dt;
+  if(sp.sp<=0){sp.sp=5.2/(.55+.45*sp.n)*rnd(.75,1.25);if(sp.q.length<5)sp.q.push(mkCust(sp))}
+  sp.q.forEach((c,i)=>{const p=lqSlot(i);c.arr=stepTo(c,p[0],p[1],2.6,dt);if(!c.arr)c.wt+=dt;
+    if(c.arr&&!c.dropped){c.dropped=true;for(let j=0;j<c.need;j++){piles.hamper.push('dirtyBag');fly('dirtyBag',c.x,c.y,.6,LHAMP[0],LHAMP[1],.4)}}});
+  const h=sp.q[0];sp.t0=(sp.t0||0)-dt;
+  if(h&&h.arr){const f=sf(has('cash'),LSERVE[0],LSERVE[1]);
+    if(f>0&&sp.t0<=0&&piles.counter.length){piles.counter.pop();h.got++;sp.t0=.22/f;fly('cleanBag',LCOUNT[0],LCOUNT[1],.8,h.x,h.y,.6);
+      if(h.got>=h.need){pay(sp,h.need*price(sp)*(h.combo?1.5:1));sp.q.shift();depart(h)}}}}
+function updShop(sp,dt){
+  const S0=SHOPS[sp.t],n=sp.n;if(!n)return;
+  sp.sp-=dt;
+  if(sp.sp<=0){sp.sp=S0.t/Math.pow(n,.85)*rnd(.8,1.2);if(sp.q.length<4)sp.q.push(mkCust(sp))}
+  for(let k=0;k<n;k++){const st=sp.st[k];if(!st.c&&sp.q.length){st.c=sp.q.shift();st.c.arr=false;st.c.seg=0;
+    if(st.c.car)st.c.path=[[stX(sp,k),-3.4],[stX(sp,k),sp.by]]}}
+  sp.q.forEach((c,i)=>{if(c.car){c.seg=0;c.arr=drive(c,[cqSlot(sp,i)],6.5,dt)}
+    else{const p=gqSlot(sp,i);c.arr=stepTo(c,p[0],p[1],2.6,dt)}if(!c.arr)c.wt+=dt});
+  for(let k=0;k<n;k++){const st=sp.st[k],c=st.c;if(!c)continue;
+    if(!c.arr){c.arr=c.car?drive(c,c.path,c.seg===1&&sp.t==='C'?2.6:6,dt):stepTo(c,custAt(sp,k)[0],custAt(sp,k)[1],2.6,dt);
+      if(!c.arr){c.wt+=dt;continue}}
+    const hired=has('h'+sp.t+k),pd=padAt(sp,k),f=sf(hired,pd[0],pd[1]);
+    if(!st.busy){
+      if(S0.in&&!piles['rack'+sp.o].length){if(!stockWarn)stockWarn=sp;continue}
+      if(S0.w&&tank.w<S0.w){tank.dryT=1.5;continue}
+      if(f<=0)continue;
+      if(S0.in)piles['rack'+sp.o].pop();if(S0.w)tank.w-=S0.w;
+      st.busy=true;st.prog=0;
+      if(c.pet){c.pet.st='table';c.pet.sp=sp;c.pet.k=k}
+      st.run=!SIM&&!hired&&!!c.pet&&Math.random()<.22;
+      if(sp.t==='C')sfx('whoosh')}
+    else{
+      if(c.pet&&c.pet.st==='run'){if(f>0&&D(player.x,player.y,c.pet.x,c.pet.y)<.95)c.pet.st='table';continue}
+      if(f<=0)continue;
+      st.prog+=dt*f/svcTime(sp);
+      if(st.run&&st.prog>.45){st.run=false;c.pet.st='run';c.pet.tt=0;toast(tr('h_dog'));sfx('bark')}
+      if(st.prog>=1){
+        if(S0.bin&&lau)piles['bin'+sp.o].push(S0.bin);
+        pay(sp,price(sp)*(c.combo?1.5:1));st.busy=false;st.prog=0;st.c=null;
+        if(c.pet)c.pet.st='follow';
+        if(c.car){c.clean=true;c.seg=0;c.path=[[stX(sp,k),-3.4],[PB.x1+12,-3.4]];outs.push(c)}
+        else depart(c)}}}}
+
+function simBot(){
+  for(const sp of shops){PS.coins+=sp.cash;sp.cash=0}
+  let best=null,bc=1e30;
+  for(const p of visPads()){const c=p.cost-(PS.pp[p.id]||0);if(c<bc){bc=c;best=p}}
+  for(const u of UPG){if(!secOn(u.sec)||lvl(u.id)>=u.n)continue;const c=upCost(u);if(c<bc){bc=c;best=u}}
+  if(best&&PS.coins>=bc){PS.coins-=bc;if(best.cost!==undefined)buyPad(best);else{PS.u[best.id]=lvl(best.id)+1;recalc()}
+    if(simLog)simLog.push([Math.round(PS.time),best.cost!==undefined?best.id:best.id+'+'+lvl(best.id),bc])}}
+
+function playerUpdate(dt){
+  const dir=inputDir();
+  if(dir){player.x+=dir[0]*pSpeed()*dt;player.y+=dir[1]*pSpeed()*dt;player.wt+=dt;player.still=0;player.moving=true}
+  else{player.still+=dt;player.moving=false}
+  collide(player);cam.x+=(player.x-cam.x)*Math.min(1,dt*6);cam.y+=(player.y-cam.y)*Math.min(1,dt*6);
+  xferT-=dt;
+  if(xferT<=0){let did=false;
+    if(player.stack.length<carryCap())for(const k in PD){const d=PD[k];if(!d.src||!piles[k].length)continue;
+      if(d.dep&&!rackNeed(d.dep))continue;
+      if(D(player.x,player.y,d.x,d.y)<d.r){const it=piles[k].pop();player.stack.push(it);fly(it,d.x,d.y,d.z+.3,player.x,player.y,1.1);sfx('pick');vib(6);did=true;break}}
+    if(player.stack.length){let done=false;
+      for(let i=0;i<(lau?lau.n:0)&&!done;i++){if(wRoom(i)<=0)continue;
+        const near=D(player.x,player.y,LWX(i)-.8,8.0)<1.5||(Math.abs(player.x-LWX(i))<.85&&player.y>6.6&&player.y<10.4);
+        if(!near)continue;
+        for(let j=player.stack.length-1;j>=0;j--)if(CLEANED[player.stack[j]]){const it=player.stack.splice(j,1)[0];
+          washers[i].inq.push(it);washers[i].idle=0;fly(it,player.x,player.y,1.1,LWX(i)-.8,8.0,.5);sfx('drop');done=did=true;break}}
+      if(!done)for(const k in PD){const d=PD[k];if(!d.acc||piles[k].length>=d.cap)continue;
+        if(d.dep&&rackNeed(d.dep))continue;
+        if(D(player.x,player.y,d.x,d.y)<d.r){let hit=false;
+          for(let j=player.stack.length-1;j>=0;j--)if(d.acc.indexOf(player.stack[j])>=0){const it=player.stack.splice(j,1)[0];
+            piles[k].push(it);fly(it,player.x,player.y,1.1,d.x,d.y,d.z+.2);sfx('drop');hit=did=true;break}
+          if(hit)break}}}
+    xferT=did?.075:.03}
+  cashT-=dt;
+  if(cashT<=0){cashT=.035;for(const sp of shops){if(sp.cash<=0)continue;const c=cashAt(sp);
+    if(D(player.x,player.y,c[0],c[1])<1.35){const take=Math.min(sp.cash,Math.max(5*PZ.pm,Math.ceil(sp.cash/10)));
+      sp.cash-=take;PS.coins+=take;setMoney();fly('cash',c[0],c[1],.3,player.x,player.y,.8);sfx('coin')}}}
+  if(player.still>.18)for(const p of visPads()){
+    if(D(player.x,player.y,p.x,p.y)<.8&&PS.coins>0){const paid=PS.pp[p.id]||0;
+      const amt=Math.min(PS.coins,p.cost-paid,Math.max(1,Math.ceil(p.cost*dt/1.1)));
+      PS.coins-=amt;PS.pp[p.id]=paid+amt;setMoney();
+      payFx-=dt;if(payFx<=0){payFx=.06;fly('cash',player.x+rnd(-.25,.25),player.y+rnd(-.25,.25),.95,p.x+rnd(-.4,.4),p.y+rnd(-.4,.4),.12,1.25)}
+      if(PS.pp[p.id]>=p.cost)buyPad(p);break}}
+}
+
+/* ---------- staff ---------- */
+function rackNeed(kind){let b=null,bs=-1;for(const sp of shops){const S0=SHOPS[sp.t];if(!sp.n||S0.in!==kind)continue;
+  const k='rack'+sp.o,d=PD[k];if(!d)continue;const room=d.cap-piles[k].length;if(room<=0)continue;
+  const sc=1-piles[k].length/d.cap;if(sc>bs){bs=sc;b={p:k}}}return b}
+const urg=dst=>{if(dst.w!==undefined)return 1;const d=PD[dst.p];if(!d)return .5;return Math.max(.06,1-piles[dst.p].length/d.cap)};
+function chooseJob(h){
+  const c=[],all=h.type==='all',cap=all?carryCap():sCap(),wr=totalWRoom();
+  if(all||h.type==='lr'){if(lau){if(wr>0)c.push({src:'hamper',kinds:['dirtyBag'],wash:1});
+    for(let i=0;i<lau.n;i++)c.push({src:'wout'+i,kinds:['cleanBag'],dst:{p:'counter'}})}}
+  if(all||h.type==='tr'){if(lau){
+    if(wr>0)for(const sp of shops)if(SHOPS[sp.t].bin&&sp.n&&piles['bin'+sp.o])c.push({src:'bin'+sp.o,kinds:['dirtyTowel'],wash:1});
+    const r=rackNeed('cleanTowel');if(r)for(let i=0;i<lau.n;i++)c.push({src:'wout'+i,kinds:['cleanTowel'],dst:r})}}
+  if(all||h.type==='sr')for(const d of depots){const r=rackNeed(d.s);if(r)c.push({src:'dep'+d.s,kinds:[d.s],dst:r})}
+  let best=null,bs=0;
+  for(const j of c){if(!j.wash&&!j.dst)continue;
+    const amt=Math.min(count(j.src,j.kinds),j.wash?wr:sinkRoom(j.dst),cap);if(amt<1)continue;
+    const sc=amt*(j.wash?1:urg(j.dst))+Math.random()*.2;
+    if(sc>bs){bs=sc;best=j}}
+  return best}
+function nav(h,tx,ty){if(!lau)return[tx,ty];
+  const a=h.y<7.6,b=ty<7.6;if(a===b)return[tx,ty];
+  const lx=LWX(0)-1.25,rx=LWX(lau.n-1)+1.25,cx=h.x+(tx-h.x)*(7.6-h.y)/((ty-h.y)||1e-6);
+  if(cx<lx||cx>rx)return[tx,ty];
+  return[(Math.abs(h.x-lx)+Math.abs(tx-lx)<Math.abs(h.x-rx)+Math.abs(tx-rx))?lx-.15:rx+.15,7.6]}
+function walk(h,tx,ty,sp,dt){const p=nav(h,tx,ty);stepTo(h,p[0],p[1],sp,dt);h.wt+=dt;collide(h);
+  h.chk=(h.chk||0)+dt;if(h.chk>1){if(h.px!==undefined&&D(h.x,h.y,h.px,h.py)<.15){h.x+=rnd(-.7,.7);h.y+=rnd(.3,.9)}h.px=h.x;h.py=h.y;h.chk=0}}
+function updStaff(h,dt){
+  const all=h.type==='all',sp=all?pSpeed():sSpeed(),cap=all?carryCap():sCap();
+  if(h.st==='idle'){h.wait-=dt;if(h.wait<=0){const j=chooseJob(h);if(j){h.job=j;h.st='toSrc'}else h.wait=.4}
+    if(h.st==='idle'&&D(h.x,h.y,h.hx,h.hy)>.2)walk(h,h.hx,h.hy,sp,dt)}
+  else if(h.st==='toSrc'){const d=PD[h.job.src];if(!d){h.st='idle';return}
+    if(D(h.x,h.y,d.x,d.y)<1.25){const j=h.job,n=Math.min(cap,j.wash?Math.max(1,totalWRoom()):sinkRoom(j.dst)),pile=piles[j.src];
+      for(let i=pile.length-1;i>=0&&h.stack.length<n;i--)if(j.kinds.indexOf(pile[i])>=0)h.stack.push(pile.splice(i,1)[0]);
+      if(h.stack.length){if(j.wash)j.dst=bestWasher()||{w:0};h.st='toDst';h.stuck=0}else{h.st='idle';h.wait=.3}}
+    else walk(h,d.x,d.y,sp,dt)}
+  else if(h.st==='toDst'){const j=h.job;
+    if(j.wash&&sinkRoom(j.dst)<=0){const alt=bestWasher(h.x);if(alt)j.dst=alt}
+    const p=sinkPos(j.dst);
+    if(D(h.x,h.y,p[0],p[1])<(j.dst.w!==undefined?1.0:1.4)){h.dropT-=dt;
+      if(h.dropT<=0){h.dropT=.1;
+        if(sinkRoom(j.dst)>0){const it=h.stack.pop();sinkAdd(j.dst,it);fly(it,h.x,h.y,1,p[0],p[1],.6);h.stuck=0}
+        else{h.stuck+=.1;if(h.stuck>2){h.stuck=0;const alt=j.wash?bestWasher():rackNeed(j.kinds[0]);if(alt)j.dst=alt}}}
+      if(!h.stack.length){h.st='idle';h.wait=.15}}
+    else walk(h,p[0],p[1],sp,dt)}}
+
+/* ---------- hints ---------- */
+function supplySrc(kind){
+  if(kind==='cleanTowel'&&lau){for(const sp of shops)if(SHOPS[sp.t].bin&&sp.n&&count('bin'+sp.o,['dirtyTowel']))return PD['bin'+sp.o];
+    for(let i=0;i<lau.n;i++)if(count('wout'+i,['cleanTowel']))return PD['wout'+i];return null}
+  return PD['dep'+kind]||null}
+function advice(){
+  const st=player.stack,hk=k=>st.indexOf(k)>=0,A=(k,x,y,a)=>({k,x,y,a});
+  for(const c of allCust())if(c.pet&&c.pet.st==='run')return A('h_dog',c.pet.x,c.pet.y);
+  if(hk('dirtyBag')||hk('dirtyTowel')){const w=bestWasher(player.x);return A('h_dirty',LWX(w?w.w:0)-.8,8.4)}
+  if(hk('cleanBag'))return A(has('cash')?'h_bag':'h_bagServe',LCOUNT[0]+.7,LCOUNT[1]);
+  for(const it of st){const r=rackNeed(it);if(r)return A('h_supply',PD[r.p].x,PD[r.p].y)}
+  for(const it of st){const d=PD['dep'+it];if(d)return A('h_return',d.x,d.y)}
+  for(const sp of shops)if(sp.cash>=price(sp)*4){const c=cashAt(sp);return A('h_cash',c[0],c[1])}
+  let bp=null;for(const p of visPads())if(PS.coins>=p.cost-(PS.pp[p.id]||0)&&(!bp||p.cost<bp.cost))bp=p;
+  if(bp)return A('h_buy',bp.x,bp.y,padLabel(bp));
+  if(stockWarn){const d=supplySrc(SHOPS[stockWarn.t].in);return d?A('h_stock',d.x,d.y):A('h_stock')}
+  if(tank.dryT>0)return A('h_water');
+  if(lau){for(let i=0;i<lau.n;i++)if(piles['wout'+i].length)return A('h_ready',LWX(i),9.1);
+    if(piles.hamper.length&&totalWRoom()>0)return A('h_hamper',LHAMP[0],LHAMP[1]);
+    if(!has('cash')&&piles.counter.length&&lau.q.length)return A('h_serve',LSERVE[0],LSERVE[1])}
+  for(const sp of shops){if(sp.t==='L')continue;
+    for(let k=0;k<sp.n;k++)if(!has('h'+sp.t+k)&&sp.st[k].c&&sp.st[k].c.arr){const p=padAt(sp,k);return A('h_station',p[0],p[1])}}
+  if(UPG.some(u=>secOn(u.sec)&&lvl(u.id)<u.n&&PS.coins>=upCost(u)))return A('h_upg');
+  return A('h_idle')}
+function updHud(){const f=tank.w/tankCap();$('wbar').style.width=Math.round(f*100)+'%';$('water').classList.toggle('low',f<.15);
+  $('upDot').hidden=!UPG.some(u=>secOn(u.sec)&&lvl(u.id)<u.n&&PS.coins>=upCost(u))}
+
+/* ---------- drawing ---------- */
+const P=(x,y,z)=>[ox+(x-y)*TW/2,oy+(x+y)*TH/2-(z||0)*HZ];
+function poly(pts,fill,stroke,lw){ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);for(let i=1;i<pts.length;i++)ctx.lineTo(pts[i][0],pts[i][1]);ctx.closePath();
+  if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1;ctx.stroke()}}
+function rect(x0,y0,x1,y1,fill,stroke,lw){poly([P(x0,y0),P(x1,y0),P(x1,y1),P(x0,y1)],fill,stroke,lw)}
+let BSC=1,BPX=0,BPY=0;
+function popSet(k,x,y){const e=popS(k);if(e){BSC=e;BPX=x;BPY=y;return true}return false}
+function popEnd(){BSC=1}
+function box(cx,cy,w,d,h,z,col){if(BSC!==1){cx=BPX+(cx-BPX)*BSC;cy=BPY+(cy-BPY)*BSC;w*=BSC;d*=BSC;h*=BSC;z*=BSC}
+  const x0=cx-w/2,x1=cx+w/2,y0=cy-d/2,y1=cy+d/2,z1=z+h,l=sh(col,.7),r=sh(col,.85);
+  poly([P(x0,y1,z1),P(x1,y1,z1),P(x1,y1,z),P(x0,y1,z)],l,l,.6);
+  poly([P(x1,y0,z1),P(x1,y1,z1),P(x1,y1,z),P(x1,y0,z)],r,r,.6);
+  poly([P(x0,y0,z1),P(x1,y0,z1),P(x1,y1,z1),P(x0,y1,z1)],col,col,.6)}
+function ell(x,y,z,r,fill,stroke,lw){const p=P(x,y,z);ctx.beginPath();ctx.ellipse(p[0],p[1],r*TW*.707,r*TH*.707,0,0,6.2832);
+  if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||2;ctx.stroke()}}
+function checker(x0,y0,x1,y1,c1,c2){rect(x0,y0,x1,y1,c1);for(let x=Math.floor(x0);x<x1;x++)for(let y=Math.floor(y0);y<y1;y++)
+  if((x+y)&1)rect(Math.max(x,x0),Math.max(y,y0),Math.min(x+1,x1),Math.min(y+1,y1),c2)}
+let lblRects=[];
+function lblBox(txt,px,coin){ctx.font='800 '+px+'px '+FONT;const cw=coin?px*1.05:0;
+  return{w:ctx.measureText(txt).width+px*1.1+cw,h:px*1.55,cw:cw,px:px}}
+function placeLbl(sx,sy,m){let ty=sy;
+  for(let g=0;g<10;g++){let hit=false;
+    for(const r of lblRects)if(Math.abs(r.x-sx)<(r.w+m.w)/2-3&&Math.abs(r.y-ty)<(r.h+m.h)/2+3){ty=r.y-(r.h+m.h)/2-4;hit=true}
+    if(!hit)break}
+  lblRects.push({x:sx,y:ty,w:m.w,h:m.h});return ty}
+function drawLbl(sx,sy,txt,bg,fg,m){ctx.font='800 '+m.px+'px '+FONT;ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillStyle=bg;ctx.beginPath();
+  if(ctx.roundRect)ctx.roundRect(sx-m.w/2,sy-m.h/2,m.w,m.h,m.h/2.6);else ctx.rect(sx-m.w/2,sy-m.h/2,m.w,m.h);ctx.fill();
+  ctx.fillStyle=fg;ctx.fillText(txt,sx-m.cw/2,sy+m.px*.08);
+  if(m.cw){ctx.beginPath();ctx.arc(sx+m.w/2-m.px*.95,sy,m.px*.42,0,6.2832);ctx.fillStyle='#ffc93c';ctx.fill();ctx.strokeStyle='#d99a17';ctx.lineWidth=m.px*.1;ctx.stroke()}}
+function label(x,y,z,txt,bg,fg,size,coin){const p=P(x,y,z),m=lblBox(txt,Math.max(10,(size||13)*Z),coin);
+  drawLbl(p[0],placeLbl(p[0],p[1],m),txt,bg,fg,m)}
+function floorText(x,y,txt,col){const p=P(x,y);ctx.save();ctx.transform(TW/80,TH/80,-TW/80,TH/80,p[0],p[1]);let px=17;ctx.font='800 '+px+'px '+FONT;
+  const w=ctx.measureText(txt).width;if(w>58){px=Math.max(8,px*58/w);ctx.font='800 '+px+'px '+FONT}
+  ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle=col;ctx.fillText(txt,0,0);ctx.restore()}
+function wrap2(txt,px,maxW){ctx.font='800 '+px+'px '+FONT;
+  if(ctx.measureText(txt).width<=maxW)return[txt];
+  const w=txt.split(' ');if(w.length<2)return[txt];
+  let best=1,bd=1e9;
+  for(let i=1;i<w.length;i++){const a=w.slice(0,i).join(' '),b=w.slice(i).join(' '),
+    d=Math.abs(ctx.measureText(a).width-ctx.measureText(b).width);if(d<bd){bd=d;best=i}}
+  return[w.slice(0,best).join(' '),w.slice(best).join(' ')]}
+function padFloor(p){const pt=P(p.x,p.y,.2),txt=padLabel(p),cost=fmt(p.cost-(PS.pp[p.id]||0));
+  const px=Math.max(9,11.5*Z),maxW=1.84*TW/2*.98;
+  const lines=wrap2(txt,px,maxW);
+  let w=0;ctx.font='800 '+px+'px '+FONT;
+  for(const ln of lines)w=Math.max(w,ctx.measureText(ln).width);
+  const cpx=px*1.08;ctx.font='800 '+cpx+'px '+FONT;
+  const cw=ctx.measureText(cost).width,r=cpx*.44,tot=cw+cpx*.3+r*2;
+  const lh=px*1.2,bw=Math.max(w,tot)+px*1.0,bh=lines.length*lh+cpx*1.35;
+  ctx.fillStyle='rgba(248,255,251,.9)';ctx.beginPath();
+  if(ctx.roundRect)ctx.roundRect(pt[0]-bw/2,pt[1]-bh/2,bw,bh,px*.62);else ctx.rect(pt[0]-bw/2,pt[1]-bh/2,bw,bh);
+  ctx.fill();ctx.strokeStyle='#2f9f6f';ctx.lineWidth=1.8*Z;ctx.stroke();
+  ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle='#17412f';ctx.font='800 '+px+'px '+FONT;
+  lines.forEach((ln,i)=>ctx.fillText(ln,pt[0],pt[1]-bh/2+lh*(i+.55)));
+  ctx.font='800 '+cpx+'px '+FONT;const cy=pt[1]+bh/2-cpx*.72;
+  ctx.fillText(cost,pt[0]-tot/2+cw/2,cy);
+  ctx.beginPath();ctx.arc(pt[0]+tot/2-r,cy,r,0,6.2832);ctx.fillStyle='#ffc93c';ctx.fill();
+  ctx.strokeStyle='#b9801a';ctx.lineWidth=r*.32;ctx.stroke()}
+function ring(x,y,z,f,col){const p=P(x,y,z),r=13*Z;ctx.beginPath();ctx.arc(p[0],p[1],r,0,6.2832);ctx.fillStyle='rgba(42,39,64,.85)';ctx.fill();
+  ctx.beginPath();ctx.arc(p[0],p[1],r*.68,-1.5708,-1.5708+6.2832*Math.max(0,Math.min(1,f)));ctx.strokeStyle=col;ctx.lineWidth=5*Z;ctx.lineCap='round';ctx.stroke();ctx.lineCap='butt'}
+function drawPile(arr,x,y,z){const n=Math.min(arr.length,48);for(let i=0;i<n;i++){const c=i%4;box(x+(c%2?.25:-.25),y+(c<2?-.25:.25),.46,.46,.16,z+((i/4)|0)*.18,K[arr[i]].c)}}
+function drawStack(arr,x,y,z){for(let i=0;i<arr.length;i++)box(x,y,.48,.48,.16,z+i*.18,K[arr[i]].c)}
+function person(x,y,o){const b=o.moving?Math.abs(Math.sin(o.wt*11))*.07:0;ell(x,y,0,.3,'rgba(30,25,50,.2)');
+  box(x,y,.34,.34,.13,0,'#3a3550');box(x,y,.46,.46,.52,.13+b,o.body);
+  const h=P(x,y,.94+b),r=.23*TW*.5+3*Z;ctx.beginPath();ctx.arc(h[0],h[1],r,0,6.2832);ctx.fillStyle=o.skin;ctx.fill();
+  if(o.hat){ctx.beginPath();ctx.arc(h[0],h[1]-r*.15,r*1.06,3.1416,0);ctx.fillStyle=o.hat;ctx.fill();
+    ctx.beginPath();ctx.ellipse(h[0]+r*.5,h[1]-r*.12,r*.8,r*.26,0,0,6.2832);ctx.fill()}
+  if(o.star){const q=P(x,y,1.5);ctx.fillStyle='#ffc93c';ctx.beginPath();
+    for(let i=0;i<10;i++){const a=-1.5708+i*.6283,rr=(i&1?3:7)*Z;ctx.lineTo(q[0]+Math.cos(a)*rr,q[1]+Math.sin(a)*rr)}ctx.fill()}
+  if(o.stack&&o.stack.length)drawStack(o.stack,x,y,1.24+b)}
+function dog(p,z){const hop=p.st==='run'?Math.abs(Math.sin(gameT*14))*.12:0;if(!z)ell(p.x,p.y,0,.26,'rgba(30,25,50,.2)');
+  box(p.x-.3,p.y,.12,.12,.23,z+.25+hop,sh(p.col,.8));box(p.x,p.y,.6,.32,.25,z+.11+hop,p.col);box(p.x+.34,p.y,.3,.34,.3,z+.23+hop,sh(p.col,1.15));
+  const e=P(p.x+.48,p.y+.07,z+.43+hop);ctx.fillStyle='#2a2740';ctx.beginPath();ctx.arc(e[0],e[1],1.6*Z,0,6.2832);ctx.fill()}
+function car(x,y,ax,col,clean,seed){const L=2.25,Wd=1.2,w=ax==='x'?L:Wd,d=ax==='x'?Wd:L;
+  ell(x,y,0,.95,'rgba(30,25,50,.18)');box(x,y,w*.96,d*.96,.14,.02,'#34304a');box(x,y,w,d,.4,.14,col);
+  box(x-(ax==='x'?.1:0),y-(ax==='y'?.1:0),ax==='x'?1:Wd*.86,ax==='x'?Wd*.86:1,.32,.54,'#cfe6f3');
+  box(x-(ax==='x'?.1:0),y-(ax==='y'?.1:0),ax==='x'?1.04:Wd*.9,ax==='x'?Wd*.9:1.04,.06,.86,sh(col,1.1));
+  if(!clean){ctx.fillStyle='rgba(110,82,50,.75)';for(let i=0;i<5;i++){const a=seed+i*2.1,q=P(x+Math.cos(a)*w*.38,y+Math.sin(a*1.7)*d*.36,.55);
+    ctx.beginPath();ctx.ellipse(q[0],q[1],5*Z,2.6*Z,0,0,6.2832);ctx.fill()}}}
+function tree(x,y){ell(x,y,0,.6,'rgba(30,25,50,.16)');box(x,y,.3,.3,.8,0,'#8a5a3c');const c=P(x,y,1.5),r=.9*TW*.5;
+  ctx.beginPath();ctx.arc(c[0],c[1],r,0,6.2832);ctx.fillStyle=PZ.pal[3];ctx.fill();
+  ctx.beginPath();ctx.arc(c[0]-r*.22,c[1]-r*.25,r*.62,0,6.2832);ctx.fillStyle=PZ.pal[4];ctx.fill()}
+function sign(x,y,txt,col){box(x,y,.14,.14,1.5,0,'#6a6480');label(x,y,1.75,txt,col,'#ffffff',13)}
+function spad(x,y,txt){const on=D(player.x,player.y,x,y)<.85,pulse=.5+.5*Math.sin(gameT*5);
+  ell(x,y,0,.62,on?'rgba(255,201,60,.75)':'rgba(255,255,255,'+(.25+.2*pulse)+')','#2a2740',2.5*Z);floorText(x,y,txt,'#2a2740')}
+function coinPile(x,y,v){const n=Math.min(36,Math.ceil(v/(5*PZ.pm)));
+  for(let i=0;i<n;i++){const c=i%6;box(x+((c%3)-1)*.4,y+(c<3?-.2:.2),.3,.3,.07,((i/6)|0)*.08,'#ffc93c')}}
+function badge(wx,wy,col,sym){const p=P(wx,wy,.6),m=30,top=96,bot=H-104;if(p[0]>m&&p[0]<W-m&&p[1]>top&&p[1]<bot)return;
+  const cx=W/2,cy=(top+bot)/2,dx=p[0]-cx,dy=p[1]-cy,s=Math.min((W/2-m)/Math.abs(dx||1e-6),((bot-top)/2)/Math.abs(dy||1e-6)),
+    bx=cx+dx*s,by=cy+dy*s,a=Math.atan2(dy,dx);
+  ctx.save();ctx.translate(bx,by);ctx.fillStyle=col;ctx.beginPath();ctx.arc(0,0,15,0,6.2832);ctx.fill();
+  ctx.beginPath();ctx.moveTo(Math.cos(a)*25,Math.sin(a)*25);ctx.lineTo(Math.cos(a+.55)*15,Math.sin(a+.55)*15);ctx.lineTo(Math.cos(a-.55)*15,Math.sin(a-.55)*15);ctx.fill();
+  if(sym==='coin'){ctx.beginPath();ctx.arc(0,0,7,0,6.2832);ctx.fillStyle='#ffc93c';ctx.fill();ctx.strokeStyle='#d99a17';ctx.lineWidth=2;ctx.stroke()}
+  else{ctx.fillStyle='#ffffff';ctx.font='800 19px '+FONT;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(sym,0,1)}
+  ctx.restore()}
+function station(sp,k,add){const x=stX(sp,k),y=sp.by,st=sp.st[k],t=sp.t,pk='st'+t+k;
+  if(t==='C'){for(let a=0;a<3;a++){const ay=y-1.9+a*.95,col=['#ef6f9b','#5b8def','#ffc93c'][a];
+    add(x-.85+ay,()=>box(x-.85,ay,.18,.18,1.6,0,col));
+    add(x+ay+.06,()=>{box(x,ay,1.9,.22,.2,1.6,col);const q=P(x,ay,1.5);ctx.fillStyle=sh(col,.7);
+      for(let j=-2;j<=2;j++)ctx.fillRect(q[0]+j*8*Z-1.5*Z,q[1]+j*4*Z,3*Z,11*Z)});
+    add(x+.85+ay,()=>box(x+.85,ay,.18,.18,1.6,0,col))}return}
+  if(t==='F'){add(x-1+y,()=>{popSet(pk,x-1,y);box(x-1,y,.5,.7,1.1,0,'#e05b3a');box(x-1,y,.32,.4,.1,1.1,'#2a2740');popEnd();
+    if(st.busy)ring(x-1,y,1.6,st.prog,'#ffc93c')});return}
+  if(t==='R'){add(x+y-.02,()=>{popSet(pk,x,y);box(x,y,1.9,1.5,.12,0,'#8d98a6');box(x-1.0,y+.5,.4,.4,.5,0,'#c0392b');popEnd();
+    if(st.busy)ring(x,y,1.5,st.prog,'#ffc93c')});return}
+  if(t==='D'){add(x+y-.03,()=>{rect(x-.95,y-.75,x+.95,y+.75,'rgba(255,255,255,.22)');
+    if(st.busy)ring(x,y,1.5,st.prog,'#ffd166')});return}
+  add(x+y,()=>{
+    popSet(pk,x,y);
+    if(t==='P'||t==='H'||t==='Y'){
+      if(t==='Y'){box(x,y,1.55,1.2,.12,0,'#e9c285');for(const o of [[-.7,0],[.7,0],[0,-.52],[0,.52]])box(x+o[0],y+o[1],.16,.16,.46,.12,'#b07a4a');
+        box(x+.4,y-.3,.26,.26,.26,.12,'#ef6f9b')}
+      else{box(x,y,1.42,1.0,.56,0,t==='H'?'#8fd6c4':'#ef8fb0');box(x,y,1.54,1.12,.07,.56,'#ffffff');
+        if(t==='H'){box(x-.72,y,.1,.1,1.1,0,'#9aa6b5');box(x-.72,y,.34,.1,.34,1.1,'#ffffff');box(x-.72,y,.12,.1,.12,1.21,'#2fa98b')}}
+      popEnd();const c=st.c;if(c&&c.pet&&c.pet.st==='table')dog(c.pet,t==='Y'?.14:.63);
+      if(st.busy&&c&&c.pet&&c.pet.st==='table')ring(x,y,t==='Y'?1.3:1.7,st.prog,SHOPS[t].c);return}
+    /* counter shops: K, J, S */
+    box(x,y,1.5,1.05,.62,0,t==='K'?'#f2b84b':t==='J'?'#f0a24a':'#d9775f');
+    box(x-.78,y-.5,.12,.12,1.4,0,'#6a6480');box(x+.78,y-.5,.12,.12,1.4,0,'#6a6480');box(x,y-.4,1.82,.56,.12,1.4,SHOPS[t].c);
+    if(t==='J')box(x+.25,y+.1,.22,.22,.3,.55,'#ff8a3d');
+    if(t==='S')box(x+.25,y+.1,.3,.3,.34,.55,'#fff3d0');
+    if(t==='K'&&st.busy)box(x+.2,y+.1,.3,.18,.05,.55,'#2a2740');
+    popEnd();if(st.busy)ring(x,y,1.9,st.prog,SHOPS[t].c)})}
+
+function draw(){
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+  const pal=PZ.pal;
+  ctx.fillStyle=pal[0];ctx.fillRect(0,0,W,H);
+  ox=W/2-(cam.x-cam.y)*TW/2;oy=H*.5-(cam.x+cam.y)*TH/2;
+  const RX0=PB.x0-13,RX1=PB.x1+13;
+  rect(RX0,-5.4,RX1,-2.6,'#5d5a70');for(let x=RX0+1;x<RX1-1;x+=2.4)rect(x,-4.08,x+1.2,-3.98,'#f3ecd8');
+  rect(PB.x0-.6,-2.6,PB.x1+.6,PB.y1+.6,pal[1],pal[2],2);
+  ctx.strokeStyle=pal[2];ctx.globalAlpha=.45;ctx.lineWidth=1;ctx.beginPath();
+  for(let x=PB.x0;x<PB.x1+.6;x+=2){const a=P(x,-2.6),b=P(x,PB.y1+.6);ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1])}
+  for(let y=-2;y<PB.y1+.6;y+=2){const a=P(PB.x0-.6,y),b=P(PB.x1+.6,y);ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1])}ctx.stroke();ctx.globalAlpha=1;
+  /* floors */
+  for(const sp of shops){const S0=SHOPS[sp.t];
+    if(sp.t==='L'){checker(-2.4,6.2,11.6,13.2,S0.f[0],S0.f[1]);continue}
+    const n=sp.n||1,w=sp.kind==='car'?CSTEP:GSTEP;
+    const x0=sp.bx-2.6,x1=sp.bx+w*(n-1)+1.5,y0=sp.kind==='car'?-1.9:sp.by-2.6,y1=sp.kind==='car'?5.0:sp.by+2.6;
+    if(sp.n)checker(x0,y0,x1,y1,S0.f[0],S0.f[1]);
+    else{ctx.setLineDash([8,6]);rect(x0,y0,x1,y1,'rgba(255,255,255,.18)',sh(S0.c,1.25),2);ctx.setLineDash([])}
+    if(sp.n&&sp.kind==='car'){rect(sp.bx-2.2,3.1,sp.bx+w*(n-1)+1.1,4.3,'#6b687f');
+      for(let k=0;k<n;k++)rect(stX(sp,k)-.95,-1.9,stX(sp,k)+.95,3.6,'#6b687f')}}
+  /* mats, pads */
+  if(lau){for(let i=0;i<lau.n;i++)rect(LWX(i)-.6,8.6,LWX(i)+.6,9.8,'#7fc3cd');
+    rect(LCASH[0]-.8,LCASH[1]-.6,LCASH[0]+.8,LCASH[1]+.6,'rgba(255,201,60,.3)');
+    if(!has('cash'))spad(LSERVE[0],LSERVE[1],tr('serve'))}
+  for(const sp of shops){if(sp.t==='L'||!sp.n)continue;const c=cashAt(sp);
+    rect(c[0]-.8,c[1]-.6,c[0]+.8,c[1]+.6,'rgba(255,201,60,.3)');
+    for(let k=0;k<sp.n;k++)if(!has('h'+sp.t+k)){const p=padAt(sp,k);spad(p[0],p[1],tr('work'))}}
+  const vp=visPads();
+  for(const p of vp){const f=(PS.pp[p.id]||0)/p.cost,r=.92;
+    rect(p.x-r,p.y-r,p.x+r,p.y+r,'rgba(238,255,246,.62)');
+    if(f>0)rect(p.x-r,p.y+r-2*r*f,p.x+r,p.y+r,'rgba(79,211,154,.62)');
+    ctx.setLineDash([7,5]);rect(p.x-r,p.y-r,p.x+r,p.y+r,null,'#2f9f6f',2.8*Z);ctx.setLineDash([])}
+
+  lblRects=[];
+  const L=[],add=(d,f)=>L.push([d,f]);
+  for(const t of TREES)add(t[0]+t[1],()=>tree(t[0],t[1]));
+  add(TANK[0]+TANK[1]-.6,()=>{const f=tank.w/tankCap();
+    for(const o of [[-.45,-.45],[.45,-.45],[-.45,.45],[.45,.45]])box(TANK[0]+o[0],TANK[1]+o[1],.14,.14,.7,0,'#6a6480');
+    box(TANK[0],TANK[1],1.25,1.25,.12,.7,'#7d7996');if(f>.02)box(TANK[0],TANK[1],1.15,1.15,1.1*f,.82,'#5fb8ee');
+    ctx.globalAlpha=.3;box(TANK[0],TANK[1],1.2,1.2,1.15,.82,'#dfe9f5');ctx.globalAlpha=1;
+    if(tank.dryT>0)label(TANK[0],TANK[1],2.5,tr('noWater'),'#ff6f59','#ffffff',12)});
+  if(lau){for(let i=0;i<lau.n;i++){const w=washers[i],x=LWX(i);
+      add(x+7.6,()=>{const on=w.run,sk=on&&!REDUCED?Math.sin(gameT*40)*.02:0;popSet('w'+i,x,7.6);
+        box(x+sk,7.6,1.3,1.15,1.1,0,'#f4f4fb');box(x+sk,7.3,1.3,.34,.13,1.1,'#cfd0e6');
+        const c=P(x+sk,8.15,.55);ctx.beginPath();ctx.ellipse(c[0],c[1],.34*TW*.5,.38*HZ,-.46,0,6.2832);
+        ctx.fillStyle=on?'#3fa9dc':w.q.length?'#8a7a66':'#5b5676';ctx.fill();ctx.strokeStyle='#8f8aa6';ctx.lineWidth=2.5*Z;ctx.stroke();
+        popEnd();if(on)ring(x,7.6,1.75,w.t/washTime(),'#4fd39a');else if(w.q.length)label(x,7.6,1.7,w.q.length+'/'+loadCap(),'#2a2740','#fff5e1',11)});
+      add(x+7.2,()=>{box(x-.8,8.0,.54,.54,.25,0,'#d8b27a');drawStack(w.inq,x-.8,8.0,.22)});
+      add(x+9.1,()=>drawPile(piles['wout'+i],x,9.1,.04))}
+    add(LHAMP[0]+LHAMP[1],()=>{box(LHAMP[0],LHAMP[1],1.1,1.1,.34,0,'#d8b27a');drawPile(piles.hamper,LHAMP[0],LHAMP[1],.3)});
+    add(LCOUNT[0]+LCOUNT[1],()=>{box(LCOUNT[0],LCOUNT[1],2.1,1.05,.68,0,'#c98f5a');drawPile(piles.counter,LCOUNT[0],LCOUNT[1],.6)});
+    add(-1.3+6.3,()=>sign(-1.3,6.3,tr('L'),SHOPS.L.c))}
+  for(const sp of shops){const S0=SHOPS[sp.t];if(sp.t==='L')continue;
+    const sx=sp.bx-(sp.kind==='car'?1.6:1.7),sy=sp.kind==='car'?-.4:sp.by-2.1;
+    add(sx+sy,()=>sign(sx,sy,tr(sp.t),sp.n?S0.c:'#8f8aa6'));
+    if(!sp.n)continue;
+    if(sp.t==='D')add(sp.bx-2.9+sp.by,()=>{box(sp.bx-2.9,sp.by,.3,3.2,.5,0,'#6a6480');box(sp.bx-2.9,sp.by,.22,3.0,2.3,.5,'#ece9f5');
+      box(sp.bx-2.85,sp.by,.1,2.7,2.0,.65,'#cfc6e4')});
+    for(let k=0;k<sp.n;k++)station(sp,k,add);
+    if(S0.in){const r=rackAt(sp);add(r[0]+r[1],()=>{popSet('rk'+sp.o,r[0],r[1]);box(r[0],r[1],1.05,1.05,.56,0,'#a9a6c2');popEnd();drawPile(piles['rack'+sp.o],r[0],r[1],.5);
+      if(!piles['rack'+sp.o].length)label(r[0],r[1],1.4,tr('outOf'),'#ff6f59','#ffffff',12)})}
+    if(S0.bin&&lau){const b=PD['bin'+sp.o];if(b)add(b.x+b.y,()=>drawPile(piles['bin'+sp.o],b.x,b.y,.02))}}
+  for(const d of depots){add(d.x+d.y,()=>{box(d.x,d.y,1.3,1.3,.52,0,'#b07a4a');drawPile(piles['dep'+d.s],d.x,d.y,.45)});
+    add(d.x+d.y-1.6,()=>sign(d.x,d.y-1.5,tr('d_'+d.s),'#b07a4a'))}
+  if(PS.done){const t=SEQ[SEQ.length-1];add(t.x+t.y,()=>{box(t.x,t.y,.7,.7,.25,0,'#b07a4a');box(t.x,t.y,.22,.22,.4,.25,'#ffc93c');box(t.x,t.y,.6,.6,.5,.65,'#ffc93c')})}
+  for(const sp of shops)if(sp.cash>0){const c=cashAt(sp);add(c[0]+c[1],()=>coinPile(c[0],c[1],sp.cash))}
+  /* hired staff */
+  if(lau&&has('cash'))add(LSERVE[0]+LSERVE[1],()=>{popSet('hpL0',LSERVE[0],LSERVE[1]);person(LSERVE[0],LSERVE[1],{body:'#17bebb',skin:SKIN[1],hat:'#2a2740',moving:false,wt:0});popEnd()});
+  for(const sp of shops){if(sp.t==='L')continue;
+    for(let k=0;k<sp.n;k++)if(has('h'+sp.t+k)){const p=padAt(sp,k);
+      add(p[0]+p[1],()=>{popSet('hp'+sp.t+k,p[0],p[1]);person(p[0],p[1],{body:sh(SHOPS[sp.t].c,1.15),skin:SKIN[(sp.o+k)%5],hat:'#2a2740',moving:false,wt:0});popEnd()})}}
+  for(const h of staff)add(h.x+h.y,()=>person(h.x,h.y,{body:h.col,skin:h.skin,hat:'#2a2740',
+    moving:h.st!=='idle'||D(h.x,h.y,h.hx,h.hy)>.25,wt:h.wt,stack:h.stack}));
+  for(const c of allCust()){
+    if(c.car){add(c.x+c.y,()=>car(c.x,c.y,c.ax,c.col,c.clean,c.seed));continue}
+    add(c.x+c.y,()=>{person(c.x,c.y,{body:c.body,skin:c.skin,moving:!c.arr,wt:c.wt,star:c.combo});
+      if(c.sp&&c.sp.t==='L'&&c.arr&&c.sp.q.indexOf(c)>=0)label(c.x,c.y,1.5+(c.combo?.35:0),'x'+(c.need-c.got),'#ffffff','#1f7fb3',12)});
+    if(c.pet&&c.pet.st!=='table')add(c.pet.x+c.pet.y,()=>{dog(c.pet,0);
+      if(c.pet.st==='run')label(c.pet.x,c.pet.y,.95,tr('catch'),'#ff6f59','#ffffff',11)})}
+  for(const t of traffic)add(t.x-4.7,()=>car(t.x,-4.7,'x',t.col,true,0));
+  add(player.x+player.y+.01,()=>{person(player.x,player.y,{body:'#ff6f59',skin:'#d9a273',hat:'#ffc93c',moving:player.moving,wt:player.wt,stack:player.stack});
+    if(player.stack.length>=carryCap())label(player.x,player.y,1.35+player.stack.length*.16,tr('full'),'#2a2740','#ffc93c',11)});
+  L.sort((a,b)=>a[0]-b[0]);for(const o of L)o[1]();
+  for(const p of vp)padFloor(p);
+
+  for(const f of fx){const t=f.t,x=f.a[0]+(f.b[0]-f.a[0])*t,y=f.a[1]+(f.b[1]-f.a[1])*t,z=f.a[2]+(f.b[2]-f.a[2])*t+Math.sin(t*3.1416)*f.hi;
+    if(f.k==='cash')box(x,y,.3,.3,.07,z,'#ffc93c');else box(x,y,.36,.36,.13,z,K[f.k].c)}
+  for(const sk of shock){const e=sk.t/.65;ctx.globalAlpha=(1-e)*.8;
+    ell(sk.x,sk.y,.06,.35+2.3*e,null,'#ffc93c',(4.5-3.4*e)*Z);ctx.globalAlpha=1}
+  for(const p of parts){const q=P(p.x,p.y,p.z);ctx.globalAlpha=Math.min(1,p.life*2);ctx.fillStyle=p.c;ctx.beginPath();ctx.arc(q[0],q[1],3.2*Z,0,6.2832);ctx.fill()}
+  ctx.globalAlpha=1;
+  const tut=S.cur===0&&Object.keys(PS.b).length<3,a=curAdvice;
+  if(S.started&&a&&a.x!==undefined){
+    if(tut||a.k==='h_dog'){const q=P(a.x,a.y,1.9+(REDUCED?0:Math.abs(Math.sin(gameT*4))*.35)),s=11*Z;
+      ctx.fillStyle='#ffc93c';ctx.strokeStyle='#2a2740';ctx.lineWidth=2.5*Z;ctx.lineJoin='round';
+      ctx.beginPath();ctx.moveTo(q[0]-s,q[1]-s*1.5);ctx.lineTo(q[0]+s,q[1]-s*1.5);ctx.lineTo(q[0],q[1]);ctx.closePath();ctx.fill();ctx.stroke()}
+    if(tut||a.k==='h_dog'||a.k==='h_stock'||a.k==='h_station')badge(a.x,a.y,a.k==='h_dog'||a.k==='h_stock'?'#ff6f59':'#2a2740','!')}
+  if(S.started){for(const sp of shops)if(sp.cash>=price(sp)*6){const c=cashAt(sp);badge(c[0],c[1],'#2a2740','coin')}
+    for(const p of vp)if(PS.coins>=p.cost-(PS.pp[p.id]||0))badge(p.x,p.y,'#2f9f6f','+')}
+  if(joy){ctx.beginPath();ctx.arc(joy.ox,joy.oy,38,0,6.2832);ctx.fillStyle='rgba(42,39,64,.18)';ctx.fill();
+    ctx.strokeStyle='rgba(255,245,225,.7)';ctx.lineWidth=2;ctx.stroke();
+    const dx=joy.x-joy.ox,dy=joy.y-joy.oy,m=Math.hypot(dx,dy)||1,k=Math.min(m,38)/m;
+    ctx.beginPath();ctx.arc(joy.ox+dx*k,joy.oy+dy*k,16,0,6.2832);ctx.fillStyle='rgba(255,245,225,.85)';ctx.fill()}
+}
+
+/* ---------- shell ---------- */
+function resize(){const r=cv.getBoundingClientRect();DPR=Math.min(window.devicePixelRatio||1,DCAP);W=r.width;H=r.height;
+  cv.width=Math.round(W*DPR);cv.height=Math.round(H*DPR);
+  Z=Math.max(.9,Math.min(1.9,Math.min(W,H*1.25)/430));TW=60*Z;TH=30*Z;HZ=31*Z}
+let last=0,slow=0;
+function frame(ts){const raw=(ts-last)/1000||0,dt=Math.min(.05,raw);last=ts;
+  const run=S.started&&!sheet&&!hiddenPause;
+  if(run){update(dt);musicTick();if(raw>.03&&raw<.2){slow+=raw;if(slow>3&&DCAP>1){DCAP=Math.max(1,DCAP-.5);slow=0;resize()}}else slow=Math.max(0,slow-raw*.5)}
+  draw();requestAnimationFrame(frame)}
+
+function openSheet(id){for(const k of ['panel','maps','menu'])$(k).hidden=k!==id;sheet=id;joy=null;for(const k in keys)keys[k]=false;
+  if(id==='panel')renderPanel();if(id==='maps')renderMaps();if(id==='menu')renderMenu()}
+function closeSheet(){for(const k of ['panel','maps','menu'])$(k).hidden=true;sheet=null;last=performance.now()}
+function back(){if(!S.started)return;if(sheet)closeSheet();else openSheet('menu')}
+function el(tag,cls,txt){const e=document.createElement(tag);if(cls)e.className=cls;if(txt!==undefined)e.textContent=txt;return e}
+function renderPanel(){const rows=$('rows');rows.textContent='';let sec=null;
+  for(const u of UPG){if(!secOn(u.sec))continue;
+    if(u.sec!==sec){sec=u.sec;rows.appendChild(el('h3','',['you','staff','water'].indexOf(sec)>=0?tr(sec):tr(sec)))}
+    const l=lvl(u.id),cost=upCost(u),row=el('div','row'),info=el('div','info');
+    const shopU=/^[A-Z]/.test(u.id);
+    const nm=u.id==='Lload'?'u_load':u.id==='Lwspeed'?'u_wspeed':shopU?(u.id.indexOf('price')>0?'u_tprice':'u_tspeed'):'u_'+u.id;
+    info.appendChild(el('div','name',tr(nm)));
+    const pips=el('div','pips');for(let i=0;i<u.n;i++)pips.appendChild(el('i',i<l?'on':''));info.appendChild(pips);
+    const b=el('button');b.type='button';b.id='up-'+u.id;
+    if(l>=u.n){b.textContent=tr('max');b.disabled=true}
+    else{b.appendChild(el('span','coin'));b.appendChild(document.createTextNode(' '+fmt(cost)));b.disabled=PS.coins<cost;
+      b.addEventListener('click',()=>{if(PS.coins<cost)return;PS.coins-=cost;PS.u[u.id]=l+1;recalc();setMoney();sfx('buy');vib(15);save();renderPanel()})}
+    row.append(info,b);rows.appendChild(row)}}
+function renderMaps(){const rows=$('mrows');rows.textContent='';
+  PLAZAS.forEach((p,i)=>{const row=el('div','row'),info=el('div','info');info.appendChild(el('div','name',(i+1)+'. '+tr('p'+i)));
+    info.appendChild(el('div','desc',p.shops.map(s=>tr(s)).join(' · ')+(S.pl[i].done?' · '+tr('complete'):'')));
+    const b=el('button');b.type='button';b.id='plz-'+i;
+    if(i===S.cur){b.textContent=tr('here');b.disabled=true}else if(i>S.maxP){b.textContent=tr('locked');b.disabled=true}
+    else{b.textContent=tr('go');b.addEventListener('click',()=>{save();enterPlaza(i);save();closeSheet();curAdvice=advice()})}
+    row.append(info,b);rows.appendChild(row)})}
+let resetArmed=false;
+function renderMenu(){$('sndBtn').textContent=tr(S.snd?'on':'off');$('musBtn').textContent=tr(S.mus?'on':'off');resetArmed=false;$('resetBtn').textContent=tr('restart')}
+function fillLang(sel){sel.textContent='';for(const l of LANGS){const o=el('option','',l[1]);o.value=l[0];sel.appendChild(o)}sel.value=S.lang}
+function applyLang(){document.documentElement.lang=S.lang;$('wrap').dir=S.lang==='ar'?'rtl':'ltr';
+  $('upTxt').textContent=tr('upg');$('mapBtn').textContent=tr('plz');$('menuBtn').textContent=tr('menu');
+  $('sTag').textContent=tr('tag');$('sHow').textContent=tr('how');$('sLang').textContent=tr('lang');
+  $('goBtn').textContent=tr(S.pl.some(p=>p.coins>0||Object.keys(p.b).length)?'back':'open');
+  $('pTitle').textContent=tr('upg');$('closeBtn').textContent=tr('back');$('mTitle').textContent=tr('plz');$('mClose').textContent=tr('back');
+  $('mnTitle').textContent=tr('paused');$('lSnd').textContent=tr('snd');$('lMus').textContent=tr('mus');$('lLang').textContent=tr('lang');$('resumeBtn').textContent=tr('resume');
+  $('langSel').value=$('langSel2').value=S.lang;SEQ=buildSeq();renderMenu();
+  if(sheet==='panel')renderPanel();if(sheet==='maps')renderMaps();
+  curAdvice=advice();$('hint').textContent=tr(curAdvice.k,curAdvice.a)}
+function setLang(l){S.lang=l;applyLang();save()}
+
+function start(data){
+  const sv=(data&&data.pl)?data:loadLocal();
+  if(sv&&sv.pl){S.cur=Math.min(sv.cur||0,PLAZAS.length-1);S.maxP=sv.maxP||0;S.snd=sv.snd!==false;S.mus=sv.mus!==false;S.last=sv.last||0;S.seen=sv.seen||{};
+    S.pl=PLAZAS.map((_,i)=>Object.assign(newPS(),sv.pl[i]||{}));if(sv.lang&&T[sv.lang])S.lang=sv.lang}
+  else{const nl=(navigator.language||'en').slice(0,2).toLowerCase();if(T[nl])S.lang=nl}
+  fillLang($('langSel'));fillLang($('langSel2'));
+  enterPlaza(S.cur);resize();applyLang();updHud();requestAnimationFrame(frame)}
+function go(){if(S.started)return;S.started=true;$('start').hidden=true;audioOn();last=performance.now()}
+
+window.addEventListener('resize',resize);
+if(window.ResizeObserver)new ResizeObserver(resize).observe(cv);
+$('goBtn').addEventListener('click',go);
+$('upBtn').addEventListener('click',()=>{if(S.started)openSheet('panel')});
+$('mapBtn').addEventListener('click',()=>{if(S.started)openSheet('maps')});
+$('menuBtn').addEventListener('click',()=>{if(S.started)openSheet('menu')});
+$('closeBtn').addEventListener('click',closeSheet);$('mClose').addEventListener('click',closeSheet);
+$('resumeBtn').addEventListener('click',closeSheet);
+$('sndBtn').addEventListener('click',()=>{S.snd=!S.snd;audioOn();renderMenu();save()});
+$('musBtn').addEventListener('click',()=>{S.mus=!S.mus;audioOn();renderMenu();save()});
+$('langSel').addEventListener('change',e=>setLang(e.target.value));$('langSel2').addEventListener('change',e=>setLang(e.target.value));
+$('resetBtn').addEventListener('click',()=>{if(!resetArmed){resetArmed=true;$('resetBtn').textContent=tr('restart2');return}
+  S.pl[S.cur]=newPS();enterPlaza(S.cur);save();closeSheet();curAdvice=advice()});
+window.addEventListener('keydown',e=>{const k=e.key.length===1?e.key.toLowerCase():e.key;
+  if(!S.started){if(k==='Enter')go();return}
+  if(k==='Escape'){back();return}
+  if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','a','d','w','s'].indexOf(k)>=0&&e.target.tagName!=='SELECT'){keys[k]=true;if(k.indexOf('Arrow')===0)e.preventDefault()}});
+window.addEventListener('keyup',e=>{const k=e.key.length===1?e.key.toLowerCase():e.key;keys[k]=false});
+window.addEventListener('blur',()=>{for(const k in keys)keys[k]=false;joy=null});
+document.addEventListener('backbutton',e=>{e.preventDefault();back()});
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden){hiddenPause=true;joy=null;if(S.started)save();if(ac)ac.suspend().catch(()=>{})}
+  else{hiddenPause=false;last=performance.now();if(ac&&S.started)ac.resume().catch(()=>{})}});
+window.addEventListener('pagehide',()=>{if(S.started)save()});
+cv.addEventListener('pointerdown',e=>{if(!S.started||sheet)return;audioOn();const r=cv.getBoundingClientRect();
+  joy={id:e.pointerId,ox:e.clientX-r.left,oy:e.clientY-r.top,x:e.clientX-r.left,y:e.clientY-r.top};
+  try{cv.setPointerCapture(e.pointerId)}catch(_){}e.preventDefault()});
+cv.addEventListener('pointermove',e=>{if(joy&&e.pointerId===joy.id){const r=cv.getBoundingClientRect();joy.x=e.clientX-r.left;joy.y=e.clientY-r.top}});
+const endJoy=e=>{if(joy&&e.pointerId===joy.id)joy=null};
+cv.addEventListener('pointerup',endJoy);cv.addEventListener('pointercancel',endJoy);
+cv.addEventListener('contextmenu',e=>e.preventDefault());
+
+window.__paceSim=function(pi,gamma,maxH,m){SIM=true;S.pl[pi]=newPS();if(gamma)PLAZAS[pi].g=gamma;if(m)PLAZAS[pi].m=m;
+  enterPlaza(pi);simLog=[];const max=(maxH||14)*3600;
+  while(PS.time<max&&!PS.done)update(.1);
+  const out={hours:PS.time/3600,done:PS.done,n:simLog.length,log:simLog,rate:PS.rate};SIM=false;simLog=null;return out};
+
+const hot=window.claude&&window.claude.hot;
+try{if(hot&&hot.snapshot)hot.snapshot(()=>saveData())}catch(e){}
+if(hot&&hot.ready)hot.ready(start);else start((hot&&hot.data)||{});
+})();
+</script>

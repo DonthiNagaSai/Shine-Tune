@@ -1,0 +1,143 @@
+<title>Shine &amp; Tune</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/*FONTFACE*/
+/* Layout: one full-bleed isometric canvas; coins, water and buttons float at the top, one hint bar sits at the bottom. */
+:root{
+  --ink:#2a2740; --panel:rgba(42,39,64,.92); --cream:#fff5e1; --gold:#ffc93c;
+  --mint:#4fd39a; --coral:#ff6f59; --grass:#b7dba0; --muted:#bdb6d6; --water:#5fb8ee;
+  --display:"Baloo 2","Noto Sans","Trebuchet MS","Segoe UI",system-ui,sans-serif;
+  color-scheme:light;
+}
+html,body{height:100%}
+body{background:var(--grass);color:var(--cream);font-family:var(--display);overflow:hidden;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
+#wrap{position:relative;height:100%;width:100%;overflow:hidden}
+#game{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none}
+#hud{position:absolute;inset:0;pointer-events:none;padding-block:10px;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  display:flex;flex-direction:column;justify-content:space-between;gap:8px}
+#top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;flex-wrap:wrap}
+#stats{display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+#cash{background:var(--panel);border-radius:14px;padding:3px 16px 1px 10px;display:flex;align-items:center;gap:8px;font-size:1.5rem;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.3}
+.coin{display:inline-block;width:.85em;height:.85em;border-radius:50%;background:var(--gold);box-shadow:inset 0 0 0 .12em #d99a17;flex:none;vertical-align:-.08em}
+#cash.pop b{display:inline-block;animation:pop .18s ease-out}
+@keyframes pop{50%{transform:scale(1.18)}}
+#water{background:var(--panel);border-radius:10px;padding:5px 10px;display:flex;align-items:center;gap:7px}
+#water .drop{width:11px;height:11px;background:var(--water);border-radius:0 50% 50% 50%;transform:rotate(45deg);flex:none}
+#water i{display:block;width:74px;height:8px;border-radius:4px;background:#5b5676;overflow:hidden}
+#water b{display:block;height:100%;width:100%;background:var(--water);border-radius:4px}
+#water.low b{background:var(--coral)}
+#btns{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+button,select{font:inherit}
+button{cursor:pointer;border:0;border-radius:12px;color:var(--ink);background:var(--gold);font-weight:800;padding:6px 13px 4px;font-size:.98rem;pointer-events:auto;line-height:1.3;position:relative}
+button.ghost{background:var(--panel);color:var(--cream);font-weight:700}
+button:focus-visible,select:focus-visible{outline:3px solid var(--cream);outline-offset:2px}
+button:disabled{background:#6d6888;color:#bdb6d6;cursor:default}
+#upDot{position:absolute;top:-4px;inset-inline-end:-4px;width:13px;height:13px;border-radius:50%;background:var(--coral);box-shadow:0 0 0 2px var(--cream)}
+#bottom{display:flex;flex-direction:column;align-items:center;gap:8px}
+#toast{background:var(--gold);color:var(--ink);font-weight:800;border-radius:12px;padding:6px 16px 4px;font-size:1.02rem;text-align:center;max-width:34rem;line-height:1.3}
+#hint{background:var(--panel);border-radius:12px;padding:8px 16px 6px;font-size:1rem;font-weight:700;text-align:center;max-width:34rem;line-height:1.3}
+.sheet{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(42,39,64,.5);
+  padding-block:16px;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+.card{background:var(--panel);border-radius:20px;padding:20px 22px 18px;max-width:30rem;width:100%;text-align:center;max-height:100%;overflow:auto}
+.card h1{font-size:clamp(2.2rem,9vw,3.4rem);line-height:1;margin:0 0 6px;color:var(--gold);font-weight:800;text-wrap:balance}
+.card h2{font-size:1.6rem;margin:0 0 8px;color:var(--gold);font-weight:800;line-height:1.15}
+.card h3{font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:14px 0 2px;text-align:start;font-weight:700}
+.card p{margin:6px 0;font-size:1.05rem;font-weight:500;line-height:1.35}
+.card p.small{color:var(--muted);font-size:.95rem}
+.card .go{margin-top:14px;font-size:1.25rem;padding:8px 28px 6px}
+.row{display:flex;align-items:center;gap:12px;text-align:start;padding:9px 0;border-top:1px solid rgba(255,245,225,.14)}
+.row .info{flex:1;min-width:0}
+.row .name{font-weight:800;font-size:1.05rem;line-height:1.2}
+.row .desc{color:var(--muted);font-size:.9rem;line-height:1.25}
+.pips{display:flex;gap:4px;margin-top:5px}
+.pips i{width:14px;height:6px;border-radius:3px;background:#5b5676}
+.pips i.on{background:var(--mint)}
+.row button{min-width:5.4rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.foot{display:flex;justify-content:space-between;gap:8px;margin-top:14px;flex-wrap:wrap}
+.foot.end{justify-content:flex-end}
+select{background:#3d3958;color:var(--cream);border:1px solid rgba(255,245,225,.25);border-radius:10px;padding:5px 10px 3px;font-weight:700;font-size:1rem;pointer-events:auto;max-width:100%}
+.langrow{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:12px;font-weight:700}
+@media (max-width:430px){button{font-size:.9rem;padding:6px 10px 4px}#cash{font-size:1.3rem}}
+@media (prefers-reduced-motion:reduce){#cash.pop b{animation:none}}
+</style>
+
+<div id="wrap">
+  <canvas id="game" aria-label="Shine and Tune game board"></canvas>
+  <div id="hud">
+    <div id="top">
+      <div id="stats">
+        <div id="cash"><span class="coin"></span><b id="money">0</b></div>
+        <div id="water" aria-label="Water tank"><span class="drop"></span><i><b id="wbar"></b></i></div>
+      </div>
+      <div id="btns">
+        <button id="upBtn" type="button"><span id="upTxt">Upgrades</span><span id="upDot" hidden></span></button>
+        <button id="mapBtn" type="button" class="ghost">Plazas</button>
+        <button id="menuBtn" type="button" class="ghost">Menu</button>
+      </div>
+    </div>
+    <div id="bottom">
+      <div id="toast" hidden></div>
+      <div id="hint"></div>
+    </div>
+  </div>
+
+  <div id="start" class="sheet">
+    <div class="card">
+      <h1>Shine &amp; Tune</h1>
+      <p id="sTag"></p>
+      <p id="sHow" class="small"></p>
+      <div class="langrow"><label for="langSel" id="sLang"></label><select id="langSel"></select></div>
+      <button id="goBtn" type="button" class="go"></button>
+    </div>
+  </div>
+
+  <div id="panel" class="sheet" hidden>
+    <div class="card">
+      <h2 id="pTitle"></h2>
+      <div id="rows"></div>
+      <div class="foot end"><button id="closeBtn" type="button"></button></div>
+    </div>
+  </div>
+
+  <div id="maps" class="sheet" hidden>
+    <div class="card">
+      <h2 id="mTitle"></h2>
+      <div id="mrows"></div>
+      <div class="foot end"><button id="mClose" type="button"></button></div>
+    </div>
+  </div>
+
+  <div id="menu" class="sheet" hidden>
+    <div class="card">
+      <h2 id="mnTitle"></h2>
+      <div class="row"><div class="info"><div class="name" id="lSnd"></div></div><button id="sndBtn" type="button"></button></div>
+      <div class="row"><div class="info"><div class="name" id="lMus"></div></div><button id="musBtn" type="button"></button></div>
+      <div class="row"><div class="info"><label class="name" for="langSel2" id="lLang"></label></div><select id="langSel2"></select></div>
+      <div class="foot">
+        <button id="resetBtn" type="button" class="ghost"></button>
+        <button id="resumeBtn" type="button"></button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(()=>{
+'use strict';
+const $=id=>document.getElementById(id);
+const cv=$('game'),ctx=cv.getContext('2d');
+const REDUCED=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+const FONT='"Baloo 2","Noto Sans","Segoe UI",system-ui,sans-serif';
+let W=0,H=0,DPR=1,DCAP=2,Z=1,TW=60,TH=30,HZ=31,ox=0,oy=0,SIM=false,simLog=null,simF=1;
+const rnd=(a,b)=>a+Math.random()*(b-a);
+const pick=a=>a[(Math.random()*a.length)|0];
+const D=(ax,ay,bx,by)=>Math.hypot(ax-bx,ay-by);
+function sh(hex,f){const n=parseInt(hex.slice(1),16);let r=n>>16,g=n>>8&255,b=n&255;
+  if(f<=1){r*=f;g*=f;b*=f}else{const k=f-1;r+=(255-r)*k;g+=(255-g)*k;b+=(255-b)*k}
+  return '#'+((1<<24)|((r|0)<<16)|((g|0)<<8)|(b|0)).toString(16).slice(1)}
+function fmt(n){n=Math.floor(n);if(n<10000)return String(n);const u=['K','M','B','T'];let i=-1;while(n>=1000&&i<3){n/=1000;i++}
+  return (n<10?n.toFixed(2):n<100?n.toFixed(1):n.toFixed(0))+u[i]}
+

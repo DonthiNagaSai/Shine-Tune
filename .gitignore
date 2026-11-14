@@ -1,0 +1,9 @@
+# build inputs
+src/font/
+# python
+__pycache__/
+*.pyc
+# playwright scratch
+wrapped.html
+g.js
+*.log
