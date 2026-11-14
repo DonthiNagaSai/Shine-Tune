@@ -795,6 +795,12 @@ function openSheet(id){for(const k of ['panel','maps','menu'])$(k).hidden=k!==id
   if(id==='panel')renderPanel();if(id==='maps')renderMaps();if(id==='menu')renderMenu()}
 function closeSheet(){for(const k of ['panel','maps','menu'])$(k).hidden=true;sheet=null;last=performance.now()}
 function back(){if(!S.started)return;if(sheet)closeSheet();else openSheet('menu')}
+/* Android hardware back, used by the native shell: close an open sheet, or pause.
+   Returns false from the pause menu so the shell knows it may exit the app. */
+window.ShineTuneBack=function(){if(!S.started)return false;
+  if(sheet==='menu'){save();return false}
+  if(sheet){closeSheet();return true}
+  openSheet('menu');return true};
 function el(tag,cls,txt){const e=document.createElement(tag);if(cls)e.className=cls;if(txt!==undefined)e.textContent=txt;return e}
 function renderPanel(){const rows=$('rows');rows.textContent='';let sec=null;
   for(const u of UPG){if(!secOn(u.sec))continue;

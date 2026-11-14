@@ -1,0 +1,12 @@
+{
+  "appId": "com.donthinagasai.shinetune",
+  "appName": "Shine & Tune",
+  "webDir": "www",
+  "android": {
+    "allowMixedContent": false,
+    "backgroundColor": "#b7dba0"
+  },
+  "server": {
+    "androidScheme": "https"
+  }
+}

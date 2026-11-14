@@ -89,6 +89,7 @@ src/body.html    the game: data tables, simulation, renderer, UI
 src/build.py     inlines the font subsets and concatenates the two into index.html
 tools/sim.py     runs the pacing bot over chosen plazas
 tools/calib2.py  binary-searches each plaza's cost curve to hit a target length
+app/             Capacitor shell that packages index.html as an Android app
 ```
 
 `index.html` is committed and playable as is. To rebuild it:
@@ -144,12 +145,59 @@ Both scripts drive the page with Playwright and Chromium.
   running long.
 - Respects `prefers-reduced-motion`.
 
+## Android build
+
+`app/` wraps the same `index.html` in a [Capacitor](https://capacitorjs.com) shell. The
+web game is the single source of truth — the shell adds nothing but the native container
+and a hardware back button handler.
+
+| | |
+| --- | --- |
+| Application ID | `com.donthinagasai.shinetune` |
+| Target / compile SDK | 36 (Android 16) |
+| Minimum SDK | 24 (Android 7) |
+| Orientation | portrait, locked |
+| Permissions | `INTERNET` only |
+
+Requires Node.js, a JDK 21 and Android Studio.
+
+```bash
+cd app
+npm install
+npm run sync      # copies ../index.html into www/ and syncs the native project
+npm run open      # opens the project in Android Studio
+```
+
+From Android Studio: **Build > Generate Signed App Bundle** to produce the `.aab` that
+Play Console accepts. Keep the signing keystore somewhere safe and backed up — an app
+can never be updated with a different key.
+
+Re-run `npm run sync` after every change to the game, or the shell keeps packaging the
+previous build.
+
+### Back button
+
+The web game exposes `window.ShineTuneBack()`. The bridge injected by
+`app/scripts/copy-web.mjs` wires Android's hardware back button to it: the first press
+closes an open panel or pauses the game, and a press from the pause menu saves and lets
+the shell exit. Without that, back would either do nothing or kill the app mid-game.
+
+### Icon and splash
+
+`app/resources/` holds the 1024px icon, its adaptive foreground and background, and the
+2732px splash screens for light and dark. Every Android density is generated from them:
+
+```bash
+cd app && npm run assets
+```
+
 ## Roadmap
 
-- Wrap as an Android app with Capacitor, lock to portrait, wire up the back button
-- Rewarded ads for double cash and instant upgrades
-- Play Store closed test, then production
+- Play a full plaza on a real phone and fix whatever that turns up
 - Have the seven translations checked by native speakers
+- Rewarded ads for double cash and instant upgrades, with a consent screen for Europe
+- Crash reporting and basic retention analytics
+- Play Store closed test (12 testers, 14 days), then production
 
 ## Credits
 
