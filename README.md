@@ -90,6 +90,8 @@ src/build.py     inlines the font subsets and concatenates the two into index.ht
 tools/sim.py     runs the pacing bot over chosen plazas
 tools/calib2.py  binary-searches each plaza's cost curve to hit a target length
 app/             Capacitor shell that packages index.html as an Android app
+store/           Play Store listing copy and the answers the console forms expect
+privacy.html     privacy policy, ready to serve from GitHub Pages
 ```
 
 `index.html` is committed and playable as is. To rebuild it:
