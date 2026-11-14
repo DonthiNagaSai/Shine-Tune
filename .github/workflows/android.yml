@@ -1,0 +1,67 @@
+name: Build Android APK
+
+# Builds an installable debug APK from the Capacitor shell.
+# Download it from the run's "Artifacts" section, copy it to an Android phone
+# and open it (you may need to allow installing from unknown sources).
+
+on:
+  push:
+    branches: [main, sai]
+    paths:
+      - 'index.html'
+      - 'src/**'
+      - 'app/**'
+      - '.github/workflows/android.yml'
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+
+      - name: Install Capacitor
+        working-directory: app
+        run: npm ci
+
+      - name: Copy the game into the shell
+        working-directory: app
+        run: npm run sync
+
+      - name: Install the Android platform
+        run: |
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" \
+            "platforms;android-36" "build-tools;36.0.0" > /dev/null
+
+      - name: Build the debug APK
+        working-directory: app/android
+        run: ./gradlew --no-daemon assembleDebug
+
+      - name: Name the APK
+        id: name
+        run: |
+          echo "sha=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: shine-and-tune-debug-${{ steps.name.outputs.sha }}
+          path: app/android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+          retention-days: 30

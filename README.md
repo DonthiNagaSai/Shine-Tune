@@ -177,6 +177,18 @@ can never be updated with a different key.
 Re-run `npm run sync` after every change to the game, or the shell keeps packaging the
 previous build.
 
+### Getting an APK without installing anything
+
+Pushing to `main` or `sai` runs [`.github/workflows/android.yml`](.github/workflows/android.yml),
+which builds a debug APK on a GitHub runner and attaches it to the run. Open the
+**Actions** tab, pick the latest *Build Android APK* run, and download the artifact from
+the bottom of the page. Copy the `.apk` to an Android phone and open it — you will need
+to allow installs from unknown sources once.
+
+That APK is debug-signed, which is fine for testing on your own devices but cannot be
+uploaded to Play. The store needs a release build signed with your own keystore, which is
+the Android Studio route above.
+
 ### Back button
 
 The web game exposes `window.ShineTuneBack()`. The bridge injected by
